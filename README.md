@@ -1,1 +1,1 @@
-Second attempt
+[![Build Status](https://travis-ci.org/Sebastian-Reid/Group-9.svg?branch=master)](https://travis-ci.org/Sebastian-Reid/Group-9)
