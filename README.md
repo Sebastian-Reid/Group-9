@@ -2,8 +2,7 @@ Master Build Status [![Build Status](https://travis-ci.org/Sebastian-Reid/sem.sv
 
 Develop Build Status [![Build Status](https://travis-ci.org/Sebastian-Reid/sem.svg?branch=develop)](https://travis-ci.org/Sebastian-Reid/sem)
 
-[![Build Status](https://travis-ci.org/Sebastian-Reid/Group-9.svg?branch=master)](https://travis-ci.org/Sebastian-Reid/Group-9)
 
 License [![LICENSE](https://img.shields.io/github/license/Sebastian-Reid/sem.svg?style=flat-square)](https://github.com/Sebastian-Reid/sem/blob/master/LICENSE)
 
-Release [![Releases](https://img.shields.io/github/release/Sebastian-Reid/sem/all.svg?style=flat-square)](https://github.com/Sebastian-Reid/sem/release)
+Release [![Releases](https://img.shields.io/github/release/Sebastian-Reid/sem/all.svg?style=flat-square)](https://github.com/Sebastian-Reid/sem/releases)
