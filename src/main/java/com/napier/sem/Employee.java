@@ -1,10 +1,11 @@
 package com.napier.sem;
 
+import java.sql.*;
+
 /**
  * Represents an employee
  */
-public class Employee
-{
+public class Employee {
     /**
      * Employee number
      */
@@ -39,5 +40,11 @@ public class Employee
      * Employee's manager
      */
     public String manager;
-}
+
+
+
+    }
+
+
+
 
