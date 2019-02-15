@@ -7,7 +7,7 @@ rectangle Database
 
 
 rectangle "Scrum System" {
-    usecase UC1 as "Get ity info"
+    usecase UC1 as "Get city info"
 
     usecase UCa as "Report to Organisation"
 
