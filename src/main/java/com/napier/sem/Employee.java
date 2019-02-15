@@ -1,7 +1,5 @@
 package com.napier.sem;
 
-import java.sql.*;
-
 /**
  * Represents an employee
  */
