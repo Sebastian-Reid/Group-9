@@ -16,7 +16,7 @@ Primary Task
 
 ### Preconditions
 
-We know the role. Database provided contains the country data.
+We know the role. Database provided contains the country and population data.
 
 ### Success End Condition
 
