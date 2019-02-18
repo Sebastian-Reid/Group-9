@@ -1,0 +1,21 @@
+@startuml
+
+rectangle Organisation
+actor ST as "Scrum Team"
+
+rectangle Database
+
+
+rectangle "Scrum System" {
+    usecase UC1 as "Get population info"
+
+    usecase UCa as "Report to Organisation"
+
+    Organisation - ST
+    ST - UC1
+    UC1 ..> UCa : supply
+    UC1 - Database
+    Organisation <- UCa
+}
+
+@enduml
