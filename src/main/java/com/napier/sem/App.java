@@ -6,6 +6,7 @@ public class App
 {
     public static void main(String[] args)
     {
+
         // Create new Application
         App a = new App();
 
@@ -66,6 +67,7 @@ public class App
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
+
     }
 
     /**
