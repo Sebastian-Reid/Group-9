@@ -9,13 +9,12 @@ public class App
 
         // Create new Application
         App a = new App();
-
+        Country c = new Country();
         // Connect to database
         a.connect();
-        // Get Employee
-        //Countries emp = a.getEmployee(255530);
-        // Display results
-        //a.displayEmployee(emp);
+        Country cnt = c.getCountry("Aruba");
+
+        c.displayCountry(cnt);
 
         // Disconnect from database
         a.disconnect();
@@ -44,16 +43,16 @@ public class App
             System.exit(-1);
         }
 
-        int retries = 10;
+        int retries = 100;
         for (int i = 0; i < retries; ++i)
         {
             System.out.println("Connecting to database...");
             try
             {
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                Thread.sleep(5000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -81,6 +80,7 @@ public class App
             {
                 // Close connection
                 con.close();
+                System.out.println("Successfully Disconnected");
             }
             catch (Exception e)
             {
