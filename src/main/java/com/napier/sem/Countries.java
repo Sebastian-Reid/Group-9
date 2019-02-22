@@ -10,12 +10,12 @@ public class Countries{
     /**
      * Employee country code
      */
-    public int country_code;
+    public int countryCode;
 
     /**
      * Employee's country name
      */
-    public String country_name;
+    public String countryName;
 
     /**
      * Employee's continent
