@@ -12,15 +12,49 @@ public class App
         Country c = new Country();
         // Connect to database
         a.connect();
-        Country cnt = c.getCountry("Aruba");
 
-        c.displayCountry(cnt);
+        a.getCountry("ABW");
+
+        c.displayCountry();
 
         // Disconnect from database
         a.disconnect();
     }
 
+    public Country getCountry(String xyz)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, Code "
+                            + "FROM country "
+                            + "WHERE country.Code =  '" + xyz + "'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Country cnt = new Country();
+                cnt.Code = rset.getString("Code");
+                cnt.Name = rset.getString("Name");
 
+                System.out.println(cnt.Name + " " + cnt.Code);
+                return cnt;
+            }
+            
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
 
     /**
      * Connection to MySQL database.
@@ -50,7 +84,7 @@ public class App
             try
             {
                 // Wait a bit for db to start
-                Thread.sleep(5000);
+                Thread.sleep(50000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
