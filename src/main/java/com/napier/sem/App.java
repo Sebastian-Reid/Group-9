@@ -12,12 +12,52 @@ public class App
         Country c = new Country();
         // Connect to database
         a.connect();
-        Country cnt = c.getCountry("Aruba");
+        a.getCountry("Aruba");
 
-        c.displayCountry(cnt);
+        c.displayCountry();
 
         // Disconnect from database
         a.disconnect();
+    }
+
+
+    public Country getCountry(String Name)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name "
+                            + "FROM country "
+                            + "WHERE country.Name = '" + Name + "'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+
+
+                Country cnt = new Country();
+                cnt.Code = rset.getString("Code");
+                cnt.Name = rset.getString("Name");
+
+                System.out.println(cnt.Code + " : " + cnt.Name);
+
+                return cnt;
+            }
+            else
+                return null;
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
     }
 
 

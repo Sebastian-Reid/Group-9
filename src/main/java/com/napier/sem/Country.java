@@ -28,48 +28,12 @@ public class Country {
     private Connection con;
 
 
-    public Country getCountry(String Name)
+
+    public void displayCountry()
     {
-        try
+        //if (cnt != null)
         {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Name, Code "
-                            + "FROM country "
-                            + "WHERE Name = " + Name;
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                Country cnt = new Country();
-                cnt.Code = rset.getString("Code");
-                cnt.Name = rset.getString("Name");
-
-                //System.out.println(cnt.Code + " : " + cnt.Name);
-
-                return cnt;
-            }
-            else
-                return null;
-
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
-    }
-
-    public void displayCountry(Country cnt)
-    {
-        if (cnt != null)
-        {
-            System.out.println(cnt.Code + "\n " + cnt.Name);
+            System.out.println(Name);
         }
     }
 
