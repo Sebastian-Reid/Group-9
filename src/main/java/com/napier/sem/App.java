@@ -23,8 +23,7 @@ public class App
 
     public Country getCountry(String xyz)
     {
-        try
-        {
+        try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -43,19 +42,17 @@ public class App
                 cnt.Name = rset.getString("Name");
 
                 System.out.println(cnt.Name + " " + cnt.Code);
-                return cnt;
+               // return null;
             }
-            
 
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country details");
-            return null;
         }
+     return null;
     }
-
     /**
      * Connection to MySQL database.
      */
