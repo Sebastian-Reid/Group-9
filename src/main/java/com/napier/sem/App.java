@@ -52,8 +52,9 @@ public class App
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country details");
-            return null;
+
         }
+        return null;
     }
 
     /**
