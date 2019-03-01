@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -13,7 +14,7 @@ public class App
         // Connect to database
         a.connect();
 
-        a.getCountry("ABW");
+        a.getAllCapital();
 
         c.displayCountry();
 
@@ -21,40 +22,48 @@ public class App
         a.disconnect();
     }
 
-    public Country getCountry(String xyz)
+    public ArrayList<City> getAllCapital()
     {
         try
         {
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
+            // ALl the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
-                    "SELECT Name, Code "
-                            + "FROM country "
-                            + "WHERE country.Code =  '" + xyz + "'";
+                    "SELECT city.Name, country.Name, city.Population "
+                            + "FROM country JOIN city "
+                            + "ON country.Code = city.CountryCode  "
+                            + "WHERE country.Capital = city.ID "
+                            + "ORDER BY city.population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
+            // Return new capital city if valid.
             // Check one is returned
-            if (rset.next())
+            ArrayList<City> capCity = new ArrayList<City>();
+            while (rset.next())
             {
-                Country cnt = new Country();
-                cnt.Code = rset.getString("Code");
-                cnt.Name = rset.getString("Name");
+                // Create new City (to store in database)
+                City cCty = new City();
+                cCty.Name = rset.getString("Name");
+                cCty.Population = rset.getInt("Population");
 
-                System.out.println(cnt.Name + " " + cnt.Code);
-                return cnt;
+                //NEED TO ADD ID Country Name
+                System.out.println(cCty.Name +  " " + cCty.Population);
+
+                capCity.add(cCty);
             }
-            
-
+           return capCity;
         }
         catch (Exception e)
         {
+            // Capital City not found.
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-
+            System.out.println("Failed to get city details");
+            return null;
         }
-        return null;
+
     }
 
     /**

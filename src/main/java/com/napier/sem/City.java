@@ -12,7 +12,4 @@ public class City {
 
     public int Population;
 
-
-
-
 }
