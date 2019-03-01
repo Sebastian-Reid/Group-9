@@ -12,7 +12,7 @@ public class Country {
 
     public String Code;
     public String Name;
-    public char Continent;
+    public String Continent;
     public String Region;
     public float SurfaceArea;
     public int IndepYear;
@@ -26,16 +26,6 @@ public class Country {
     public int Capital;
     public char Code2;
 
-
-
-
-    public void displayCountry()
-    {
-      //  if (cnt != null)
-        {
-            System.out.println(Name);
-        }
-    }
 
 }
 

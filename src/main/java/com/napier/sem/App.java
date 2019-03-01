@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -9,50 +10,63 @@ public class App
 
         // Create new Application
         App a = new App();
-        Country c = new Country();
+        //Country cnt = new Country();
         // Connect to database
         a.connect();
 
-        a.getCountry("ABW");
+        ArrayList<Country> country = a.getCountry();
 
-        c.displayCountry();
+        //c.displayCountry();
 
         // Disconnect from database
         a.disconnect();
     }
 
-    public Country getCountry(String xyz)
+    public ArrayList<Country> getCountry()
     {
-        try {
-            // Create an SQL statement
+        try
+        {
             Statement stmt = con.createStatement();
-            // Create string for SQL statement
+
+            int totalPop = 0;
+           // Country cnt = new Country();
+           // String allContinent = null;
+
             String strSelect =
-                    "SELECT Name, Code "
-                            + "FROM country "
-                            + "WHERE country.Code =  '" + xyz + "'";
-            // Execute SQL statement
+                   " SELECT country.Continent, country.Population "
+                + " FROM country" +
+                           " GROUP BY Continent, Population ";
+
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            if (rset.next())
+
+            ArrayList<Country> country = new ArrayList<Country>();
+            while(rset.next())
             {
                 Country cnt = new Country();
-                cnt.Code = rset.getString("Code");
-                cnt.Name = rset.getString("Name");
 
-                System.out.println(cnt.Name + " " + cnt.Code);
-               // return null;
+                cnt.Continent = rset.getString("Continent");
+                cnt.Population = rset.getInt("Population");
+
+               // totalPop = totalPop + cnt.Population;
+               // allContinent = allContinent + cnt.Continent;
+
+                System.out.println(cnt.Population + " " + cnt.Continent);
+                //System.out.println(cnt. Continent + " " + totalPop);
+              //  System.out.println(allContinent);
+                country.add(cnt);
+
             }
 
+            return country;
         }
-        catch (Exception e)
+        catch(Exception e)
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country details");
+            return null;
         }
-     return null;
     }
+
     /**
      * Connection to MySQL database.
      */
