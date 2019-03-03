@@ -7,7 +7,44 @@ import java.sql.*;
  */
 
 // code, name, continent, region, population, capital
+//sql 1
+//SELECT COUNTRY.Name, COUNTRY.Population
+//FROM COUNTRY
+//ORDER BY COUNTRY.Population DESC
 
+
+//sql2
+//SELECT COUNTRY.Continent, SUM(Population)
+//FROM COUNTRY
+//GROUP BY COUNTRY.Continent
+//ORDER BY SUM(Population) DESC
+
+//sql3
+//SELECT COUNTRY.Region, SUM(Population)
+//FROM COUNTRY
+//GROUP BY COUNTRY.Region
+//ORDER BY SUM(Population) DESC
+
+//sql4 not completed
+//SELECT Name, Population
+//FROM COUNTRY
+//ORDER BY Population DESC
+//LIMIT 5
+
+
+
+
+
+//sql7
+//SELECT CITY.Name, CITY.Population
+//FROM CITY
+//ORDER BY CITY.Population DESC
+
+//sql8 not checked
+//SELECT  COUNTRY.Continent, CITY.Name, CITY.Population
+//FROM CITY
+//INNER JOIN COUNTRY ON CITY.CountryCode=COUNTRY.Code
+//ORDER BY COUNTRY.Continent, CITY.Population DESC
 public class Country {
 
     public String Code;
