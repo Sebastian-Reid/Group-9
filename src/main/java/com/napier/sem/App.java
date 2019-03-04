@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class App
 {
+
     public static void main(String[] args)
     {
 
@@ -12,12 +13,12 @@ public class App
         Country c = new Country();
         // Connect to database
         a.connect();
-        Country cnt = c.getCountry("Aruba");
 
-        c.displayCountry(cnt);
+       // a.displayCountry();
 
         // Disconnect from database
         a.disconnect();
+
     }
 
 
@@ -88,6 +89,348 @@ public class App
             }
         }
     }
+
+    // 1st statement
+    public Country getAllCountries() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Name, country.Population"
+                            + "FROM country"
+                            + "ORDER BY country.Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next()) {
+                Country cnt = new Country();
+                cnt.Population = rset.getInt("Population");
+                cnt.Name = rset.getString("Name");
+
+                System.out.println(cnt.Name + " : " + cnt.Population);
+                return cnt;
+            } else
+                return null;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    public void displayCountry(Country cnt) {
+        if (cnt != null) {
+            System.out.println(cnt.Name + "\n " + cnt.Population);
+        }
+    }
+
+/*
+    //2nd statement
+    public Country getCountry(String Name) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+
+                    "SELECT country.Continent, country.Name, SUM(country.Population)"
+                            + "FROM country"
+                            + "GROUP BY country.Continent, country.Name"
+                            + "ORDER BY county.Continent, SUM(country.Population) DESC"
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next()) {
+                Country cnt = new Country();
+                cnt.Continent = rset.getint("Continent");
+                cnt.Name = rset.getString("Name");
+                cnt.Population = rset.getint("Population");
+
+                //System.out.println(cnt.Continent + " : " + cnt.Name + " : " + cnt.Population);
+
+                return cnt;
+            } else
+                return null;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    public void displayCountry(Country cnt) {
+        if (cnt != null) {
+            System.out.println(cnt.Continent + "\n " + cnt.Name + "\n" + cnt.Population);
+        }
+    }
+
+
+//3rd sql
+
+
+    public Country getCountry(String Region, int Population, String Name) {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+
+                    "SELECT country.Region, country.Name, SUM(country.Population)"
+                            + "FROM country"
+                            + "GROUP BY country.Region, country.Name"
+                            + "ORDER BY county.Region, SUM(country.Population) DESC"
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next()) {
+                Country cnt = new Country();
+                cnt.Region = rset.getString("Region");
+                cnt.Name = rset.getString("Name");
+                cnt.Population = rset.getInt("Population");
+
+                //System.out.println(cnt.Region + " : " + cnt.Name + " : " + cnt.Population);
+
+                return cnt;
+            } else
+                return null;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    //sql 7
+    public City getCity(String Name, int Population)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, city.Population"
+                            +"FROM city"
+                            +"ORDER BY city.Population DESC"
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                City cty = new City();
+                cty.Region = rset.getString("Region");
+                cty.Name = rset.getString("Name");
+                cty.Population = rset.getInt("Population");
+
+                //System.out.println(cty.Region + " : " + cty.Name + " : " + cty.Population);
+
+                return cty;
+            }
+            else
+                return null;
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+//sql 8
+
+    public City getCity(String Name, int Population)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+
+                    "SELECT country.Continent, city.Name, city.Population"
+                            +"FROM city"
+                            +"INNER JOIN country ON city.CountryCode=Country.Code"
+                            +"ORDER BY country.Continent, city.Population DESC"
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                City cty = new City();
+                cty.Name = rset.getString("Name");
+                cty.Population = rset.getInt("Population");
+                cnt.Continent = rset.getString("Continent");
+
+                //System.out.println(cnt.Continent + " : " + cty.Name + " : " + cty.Population);
+
+                return cty;
+            }
+            else
+                return null;
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+
+    //sql 9
+    public City getCity(String Name, int Population)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+
+                    "SELECT country.Region, city.Name, city.Population"
+                            +"FROM city"
+                            +"INNER JOIN country ON city.CountryCode=Country.Code"
+                            +"ORDER BY country.Region, city.Population DESC"
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                City cty = new City();
+                cty.Name = rset.getString("Name");
+                cty.Population = rset.getInt("Population");
+                cnt.Region = rset.getString("Region");
+
+                //System.out.println(cnt.Region + " : " + cty.Name + " : " + cty.Population);
+
+                return cty;
+            }
+            else
+                return null;
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+    //sql 10
+    public City getCity(String Name, int Population)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+
+                    "SELECT country.Name, city.Name, city.Population"
+                            +"FROM city"
+                            +"INNER JOIN country ON city.CountryCode=Country.Code"
+                            +"ORDER BY country.Continent, city.Population DESC"
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                City cty = new City();
+                cty.Name = rset.getString("city.Name");
+                cty.Population = rset.getInt("city.Population");
+                cnt.Name = rset.getString("country.Name");
+
+                //System.out.println(cnt.Name + " : " + cty.Name + " : " + cty.Population);
+
+                return cty;
+            }
+            else
+                return null;
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+
+//sql 11
+
+    public City getCity(String Name, int Population, String District)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.District, city.Name, city.Population"
+                            +"FROM city"
+                            +"ORDER BY city.District, city.Population DESC"
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                City cty = new City();
+                cty.District = rset.getString("District");
+                cty.Name = rset.getString("Name");
+                cty.Population = rset.getInt("Population");
+
+                //System.out.println(cty.District + " : " + cty.Name + " : " + cty.Population);
+
+                return cty;
+            }
+            else
+                return null;
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+
+
+
+*/
+
+
+
 
 }
 
