@@ -33,9 +33,10 @@ public class App
            // String allContinent = null;
 
             String strSelect =
-                   " SELECT country.Continent, country.Population "
+                   " SELECT DISTINCT(country.Continent) AS Continent, SUM(country.Population) AS Population "
                 + " FROM country" +
-                           " GROUP BY Continent, Population ";
+                           " GROUP BY Continent"; //+
+                           //"ORDER BY COUNT(Population)";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -45,12 +46,12 @@ public class App
                 Country cnt = new Country();
 
                 cnt.Continent = rset.getString("Continent");
-                cnt.Population = rset.getInt("Population");
+                cnt.Population = rset.getLong("Population");
 
                // totalPop = totalPop + cnt.Population;
                // allContinent = allContinent + cnt.Continent;
 
-                System.out.println(cnt.Population + " " + cnt.Continent);
+                System.out.println(cnt.Population+ " " + cnt.Continent);
                 //System.out.println(cnt. Continent + " " + totalPop);
               //  System.out.println(allContinent);
                 country.add(cnt);
