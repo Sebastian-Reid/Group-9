@@ -10,8 +10,5 @@
         <module name="seMethods" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Group-9" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

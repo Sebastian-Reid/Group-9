@@ -7,18 +7,12 @@ public class App
 {
     public static void main(String[] args)
     {
-
-        // Create new Application
         App a = new App();
-        //Country cnt = new Country();
-        // Connect to database
+
         a.connect();
 
         ArrayList<Country> country = a.getCountry();
 
-        //c.displayCountry();
-
-        // Disconnect from database
         a.disconnect();
     }
 
@@ -28,15 +22,24 @@ public class App
         {
             Statement stmt = con.createStatement();
 
-            int totalPop = 0;
-           // Country cnt = new Country();
-           // String allContinent = null;
 
-            String strSelect =
+
+           /* String strSelect =
                    " SELECT DISTINCT(country.Continent) AS Continent, SUM(country.Population) AS Population "
                 + " FROM country" +
-                           " GROUP BY Continent"; //+
-                           //"ORDER BY COUNT(Population)";
+                           " GROUP BY Continent"; */ //population of people in each continent
+
+            /* String strSelect =
+                " SELECT  DISTINCT(country.Region) AS Region, SUM(country.Population) AS Population "
+                        + " FROM country" +
+                        " GROUP BY Region"; */ //population of people in each region
+
+           /* String strSelect =
+                    " SELECT  DISTINCT(country.Name) AS Name, SUM(country.Population) AS Population "
+                            + " FROM country" +
+                            " GROUP BY Name"; */ //population of people in each country
+
+
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -45,15 +48,15 @@ public class App
             {
                 Country cnt = new Country();
 
-                cnt.Continent = rset.getString("Continent");
+               // cnt.Continent = rset.getString("Continent");
                 cnt.Population = rset.getLong("Population");
+                cnt.Name = rset.getString("Name");
+                //cnt.Region = rset.getString("Region");
 
-               // totalPop = totalPop + cnt.Population;
-               // allContinent = allContinent + cnt.Continent;
+                System.out.println(cnt.Population+ " " + cnt.Name);
+                //System.out.println(cnt.Population+ " " + cnt.Region);
+                //System.out.println(cnt.Population+ " " + cnt.Continent);
 
-                System.out.println(cnt.Population+ " " + cnt.Continent);
-                //System.out.println(cnt. Continent + " " + totalPop);
-              //  System.out.println(allContinent);
                 country.add(cnt);
 
             }
