@@ -1,6 +1,9 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class App
 {
@@ -14,8 +17,7 @@ public class App
         // Connect to database
         a.connect();
 
-       // a.displayCountry();
-
+        ArrayList<Country> country = a.getCountry();
         // Disconnect from database
         a.disconnect();
 
@@ -91,7 +93,7 @@ public class App
     }
 
     // 1st statement
-    public Country getAllCountries() {
+    public ArrayList<Country> getCountry() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -103,17 +105,18 @@ public class App
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            if (rset.next()) {
+
+            ArrayList<Country> country = new ArrayList<Country>();
+            while(rset.next())
+            {
                 Country cnt = new Country();
                 cnt.Population = rset.getInt("Population");
                 cnt.Name = rset.getString("Name");
 
-                System.out.println(cnt.Name + " : " + cnt.Population);
-                return cnt;
-            } else
-                return null;
+                country.add(cnt);
+            }
+
+            return country;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -122,11 +125,6 @@ public class App
         }
     }
 
-    public void displayCountry(Country cnt) {
-        if (cnt != null) {
-            System.out.println(cnt.Name + "\n " + cnt.Population);
-        }
-    }
 
 /*
     //2nd statement
@@ -423,14 +421,62 @@ public class App
             return null;
         }
     }
-
-
-
-
 */
+//sql 4
+
+/*
+
+    class Input {
+        public static void main (String[] args){
+            Scanner input = new Scanner(System.in);
+
+            System.out.print("Enter N where N is the number of top results you wish to see: ");
+            int number = input.nextInt();
+        }
 
 
+        public City getCity(String Name, int Population, String District, int number)
+        {
+            try
+            {
+                // Create an SQL statement
+                Statement stmt = con.createStatement();
+                // Create string for SQL statement
+                String strSelect =
+                        "SELECT country.Name, country.Population"
+                                + "FROM country"
+                                + "ORDER BY country.Population DESC"
+                                + "LIMIT 'number'";
 
 
+                // Execute SQL statement
+                ResultSet rset = stmt.executeQuery(strSelect);
+                // Return new employee if valid.
+                // Check one is returned
+                if (rset.next())
+                {
+                    City cty = new City();
+                    cty.District = rset.getString("District");
+                    cty.Name = rset.getString("Name");
+                    cty.Population = rset.getInt("Population");
+
+                    //System.out.println(cty.District + " : " + cty.Name + " : " + cty.Population);
+
+                    return cty;
+                }
+                else
+                    return null;
+
+            }
+            catch (Exception e)
+            {
+                System.out.println(e.getMessage());
+                System.out.println("Failed to get city details");
+                return null;
+            }
+        }
+*/
 }
+
+
 
