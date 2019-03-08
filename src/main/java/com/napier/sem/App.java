@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+import javax.naming.Name;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -22,17 +23,17 @@ public class App
         a.disconnect();
     }
 
+    /*
     public ArrayList<City> getAllCapital()
     {
         try
         {
-
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             // ALl the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
-                    "SELECT city.Name, country.Name, city.Population "
+                    "SELECT city.Name, country.name AS 'CountryName', city.Population "
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
                             + "WHERE country.Capital = city.ID "
@@ -48,13 +49,15 @@ public class App
                 City cCty = new City();
                 cCty.Name = rset.getString("Name");
                 cCty.Population = rset.getInt("Population");
+                // cCty.CountryCode = rset.getString("CountryCode");
 
-                //NEED TO ADD ID Country Name
-                System.out.println(cCty.Name +  " " + cCty.Population);
+                Country cCountry = new Country();
+                cCountry.Name = rset.getString("CountryName");
+                System.out.println(cCty.Name +  " " + cCty.Population + " " + cCountry.Name);
 
                 capCity.add(cCty);
             }
-           return capCity;
+            return capCity;
         }
         catch (Exception e)
         {
@@ -65,6 +68,55 @@ public class App
         }
 
     }
+    */
+
+    // Get all the capitals and populations within a continent
+    public ArrayList<City> getAllCapital()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            // ALl the capital cities in the WORLD organised by largest population to smallest
+            String strSelect =
+                    "SELECT city.Name, country.name AS 'CountryName', DISTINCT(country.Continent) AS 'continent', city.Population "
+                            + "FROM country JOIN city "
+                            + "ON country.Code = city.CountryCode  "
+                            + "WHERE country.Capital = city.ID  "
+                            + "ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new capital city if valid.
+            // Check one is returned
+            ArrayList<City> capCity = new ArrayList<City>();
+            while (rset.next())
+            {
+                // Create new City (to store in database)
+                City cCty = new City();
+                cCty.Name = rset.getString("Name");
+                cCty.Population = rset.getInt("Population");
+                // cCty.CountryCode = rset.getString("CountryCode");
+
+                Country cCountry = new Country();
+                cCountry.Name = rset.getString("CountryName");
+                cCountry.Continent = rset.getString("continent");
+                System.out.println(cCty.Name +  " " + cCty.Population + " " + cCountry.Name);
+
+                capCity.add(cCty);
+            }
+            return capCity;
+        }
+        catch (Exception e)
+        {
+            // Capital City not found.
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+
+    }
+
 
     /**
      * Connection to MySQL database.
