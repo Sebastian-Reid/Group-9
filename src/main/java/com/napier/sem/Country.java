@@ -44,7 +44,7 @@ public class Country {
 
     public String Code;
     public String Name;
-    public int Continent;
+    public String Continent;
     public String Region;
     public float SurfaceArea;
     public int IndepYear;
