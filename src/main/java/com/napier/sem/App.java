@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ public class App {
         ArrayList<Country> country = a.getCountry();
 
         a.disconnect();
+
 
     }
 
