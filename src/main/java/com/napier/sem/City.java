@@ -13,6 +13,5 @@ public class City {
     public int Population;
 
 
-
-
+    public String cName;
 }

@@ -22,42 +22,76 @@ public class App
         {
             Statement stmt = con.createStatement();
 
+        /*
+            The population of people, people living in cities, and people not living in cities in each continent.
+            The population of people, people living in cities, and people not living in cities in each region.
+            The population of people, people living in cities, and people not living in cities in each country.
+          */
 
 
-           /* String strSelect =
+            /*
+            String strSelect =
+                " SELECT country.Continent, SUM(city.Population) AS Population, city.Name " +
+                        " FROM country JOIN city ON country.Code = city.CountryCode " +
+                        " GROUP BY Continent, Name "; */ //population of people in cities in each continent
+
+            /* String strSelect =
                    " SELECT DISTINCT(country.Continent) AS Continent, SUM(country.Population) AS Population "
                 + " FROM country" +
                            " GROUP BY Continent"; */ //population of people in each continent
+
 
             /* String strSelect =
                 " SELECT  DISTINCT(country.Region) AS Region, SUM(country.Population) AS Population "
                         + " FROM country" +
                         " GROUP BY Region"; */ //population of people in each region
 
-           /* String strSelect =
+            /*
+            String strSelect =
+                    " SELECT country.Region, SUM(city.Population) AS Population, city.Name" +
+                            " FROM country JOIN city ON country.Code = city.CountryCode" +
+                            " GROUP BY Region, Name "; */ //population of people in each city in each region
+
+            /*
+            String strSelect =
                     " SELECT  DISTINCT(country.Name) AS Name, SUM(country.Population) AS Population "
                             + " FROM country" +
-                            " GROUP BY Name"; */ //population of people in each country
+                            " GROUP BY Name"; */  //population of people in each country
+
+
+            String strSelect =
+                    " SELECT country.Name, SUM(city.Population) AS Population, city.Name AS cName" +
+                            " FROM country JOIN city ON country.Code = city.CountryCode " +
+                            " GROUP BY Name, cName ";  //population of people in each city in each country
 
 
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
             ArrayList<Country> country = new ArrayList<Country>();
+            ArrayList<City> city = new ArrayList<City>();
             while(rset.next())
             {
                 Country cnt = new Country();
+                City cCity = new City();
 
-               // cnt.Continent = rset.getString("Continent");
+                cCity.Name = rset.getString("cName");
+                //cnt.Continent = rset.getString("Continent");
                 cnt.Population = rset.getLong("Population");
                 cnt.Name = rset.getString("Name");
                 //cnt.Region = rset.getString("Region");
 
-                System.out.println(cnt.Population+ " " + cnt.Name);
-                //System.out.println(cnt.Population+ " " + cnt.Region);
+
+
                 //System.out.println(cnt.Population+ " " + cnt.Continent);
+                //System.out.println(cnt.Population+ " " + cnt.Region);
+                //System.out.println(cnt.Name + " " + cnt.Population  + " " + cnt.Continent);
+               // System.out.println(cnt.Name + " " + cnt.Population + " " + cnt.Region);
+                System.out.println(cCity.cName + " " + cnt.Population + " " + cnt.Name);
 
                 country.add(cnt);
+
+
 
             }
 
