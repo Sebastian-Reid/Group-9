@@ -15,9 +15,11 @@ public class App
         // Connect to database
         a.connect();
 
-        a.getAllCapital();
+        // a.getAllCapital
+       // a.getAllContinent("Asia");
+        a.getAllRegion("Caribbean");
 
-        c.displayCountry();
+       // c.displayCountry();
 
         // Disconnect from database
         a.disconnect();
@@ -68,10 +70,10 @@ public class App
         }
 
     }
-    */
 
+    /*
     // Get all the capitals and populations within a continent
-    public ArrayList<City> getAllCapital()
+    public ArrayList<City> getAllContinent(String continent)
     {
         try
         {
@@ -80,11 +82,11 @@ public class App
             // Create string for SQL statement
             // ALl the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
-                    "SELECT city.Name, country.name AS 'CountryName', DISTINCT(country.Continent) AS 'continent', city.Population "
+                    "SELECT city.Name, country.Name AS 'CountryName', city.Population "
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
-                            + "WHERE country.Capital = city.ID  "
-                            + "ORDER BY city.Population DESC";
+                            + "WHERE country.Capital = city.ID AND country.Continent = " + "'" + continent +"'"
+                            + " ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -96,11 +98,10 @@ public class App
                 City cCty = new City();
                 cCty.Name = rset.getString("Name");
                 cCty.Population = rset.getInt("Population");
-                // cCty.CountryCode = rset.getString("CountryCode");
 
                 Country cCountry = new Country();
                 cCountry.Name = rset.getString("CountryName");
-                cCountry.Continent = rset.getString("continent");
+                //cCountry.Continent = rset.getString("continent");
                 System.out.println(cCty.Name +  " " + cCty.Population + " " + cCountry.Name);
 
                 capCity.add(cCty);
@@ -116,7 +117,51 @@ public class App
         }
 
     }
+    */
 
+    public ArrayList<City> getAllRegion(String region)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            // ALl the capital cities in the WORLD organised by largest population to smallest
+            String strSelect =
+                    "SELECT city.Name, country.Name AS 'CountryName', city.Population "
+                            + "FROM country JOIN city "
+                            + "ON country.Code = city.CountryCode  "
+                            + "WHERE country.Capital = city.ID AND country.Region = " + "'" + region +"'"
+                            + " ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new capital city if valid.
+            // Check one is returned
+            ArrayList<City> capCity = new ArrayList<City>();
+            while (rset.next())
+            {
+                // Create new City (to store in database)
+                City cCty = new City();
+                cCty.Name = rset.getString("Name");
+                cCty.Population = rset.getInt("Population");
+
+                Country cCountry = new Country();
+                cCountry.Name = rset.getString("CountryName");
+                System.out.println(cCty.Name +  " " + cCty.Population + " " + cCountry.Name);
+
+                capCity.add(cCty);
+            }
+            return capCity;
+        }
+        catch (Exception e)
+        {
+            // Capital City not found.
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+
+    }
 
     /**
      * Connection to MySQL database.
