@@ -20,66 +20,93 @@ public class App {
         try {
             Statement stmt = con.createStatement();
 
-
-
-           /* String strSelect =
-                   " SELECT DISTINCT(country.Continent) AS Continent, SUM(country.Population) AS Population "
-                + " FROM country" +
-                           " GROUP BY Continent"; */ //population of people in each continent
-
-            /* String strSelect =
-                " SELECT  DISTINCT(country.Region) AS Region, SUM(country.Population) AS Population "
-                        + " FROM country" +
-                        " GROUP BY Region"; */ //population of people in each region
-
-            /*String strSelect =
-                    " SELECT  DISTINCT(country.Name) AS Name, SUM(country.Population) AS Population "
-                            + " FROM country" +
-                            " GROUP BY Name";  //population of people in each country*/
-
+            //All the countries in the WORLD organised by largest population to smallest.
             /*String strSelect =
                     "SELECT country.Name, country.Population"
                             + " FROM country"
-                            + " ORDER BY Population DESC"; //All the countries in the world organised by largest population to smallest.*/
+                            + " ORDER BY Population DESC"; */
 
-            String strSelect =
+            // All the countries in a region organised by largest population to smallest.
+            /*String strSelect =
                     "SELECT country.Continent, country.Name, SUM(country.Population)"
                             + " FROM country"
                             + " GROUP BY country.Continent, country.Name"
-                            + " ORDER BY county.Continent, SUM(country.Population) DESC";
+                            + " ORDER BY county.Continent, SUM(country.Population) DESC"; */
 
+            // All the cities in the world organised by largest population to smallest.
             /*String strSelect =
                     "SELECT city.Name, city.Population"
                             +"FROM city"
                             +"ORDER BY city.Population DESC" //sql 7.*/
 
+           //All the cities in a continent organised by largest population to smallest.
             /*String strSelect =
                     "SELECT country.Continent, city.Name, city.Population"
                             +"FROM city"
                             +"INNER JOIN country ON city.CountryCode=Country.Code"
                             +"ORDER BY country.Continent, city.Population DESC" //sql 8.*/
 
+            //All the cities in a region organised by largest population to smallest.
             /*String strSelect =
                     "SELECT country.Region, city.Name, city.Population"
                             +"FROM city"
                             +"INNER JOIN country ON city.CountryCode=Country.Code"
                             +"ORDER BY country.Region, city.Population DESC" //sql 9.*/
 
+            //All the cities in a country organised by largest population to smallest.
             /*String strSelect =
                     "SELECT country.Name, city.Name, city.Population"
                             +"FROM city"
                             +"INNER JOIN country ON city.CountryCode=Country.Code"
                             +"ORDER BY country.Continent, city.Population DESC" sql 10 */
 
+            //All the cities in a district organised by largest population to smallest.
             /*String strSelect =
                     "SELECT city.District, city.Name, city.Population"
                             +"FROM city"
                             +"ORDER BY city.District, city.Population DESC" sql 11 */
 
+            // All the capital cities in the WORLD organised by largest population to smallest
+            String strSelect =
+                    "SELECT city.Name, country.name AS 'CountryName', city.Population "
+                            + "FROM country JOIN city "
+                            + "ON country.Code = city.CountryCode  "
+                            + "WHERE country.Capital = city.ID "
+                            + "ORDER BY city.population DESC";
 
+            /*// All the capital cities by CONTINENT organised by largest population to smallest
+            "String strSelect =
+                  "SELECT city.Name, country.Name AS 'CountryName', city.Population "
+                            + "FROM country JOIN city "
+                            + "ON country.Code = city.CountryCode  "
+                            + "WHERE country.Capital = city.ID AND country.Continent = " + "'" + continent +"'"
+                            + " ORDER BY city.Population DESC"; */
 
+            /*// All the capital cities by REGION organised by largest population to smallest
+            "String strSelect =
+                   "SELECT city.Name, country.Name AS 'CountryName', city.Population "
+                            + "FROM country JOIN city "
+                            + "ON country.Code = city.CountryCode  "
+                            + "WHERE country.Capital = city.ID AND country.Region = " + "'" + region +"'"
+                            + " ORDER BY city.Population DESC"; */
 
+            //population of people in each CONTINENT
+           /* String strSelect =
+                   " SELECT DISTINCT(country.Continent) AS Continent, SUM(country.Population) AS Population "
+                + " FROM country" +
+                           " GROUP BY Continent"; */
 
+            //population of people in each REGION
+            /* String strSelect =
+                " SELECT  DISTINCT(country.Region) AS Region, SUM(country.Population) AS Population "
+                        + " FROM country" +
+                        " GROUP BY Region"; */
+
+            //population of people in each COUNTRY
+            /*String strSelect =
+                    " SELECT  DISTINCT(country.Name) AS Name, SUM(country.Population) AS Population "
+                            + " FROM country" +
+                            " GROUP BY Name"; */
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -89,17 +116,25 @@ public class App {
 
                 cnt.Continent = rset.getString("Continent");
                 cnt.Population = (int) rset.getLong("Population");
-                cnt.Name = rset.getString("Name");
+                //cnt.Name = rset.getString("Name");
                 //cnt.Region = rset.getString("Region");
 
 
                 //System.out.println(cnt.Population + " " + cnt.Name);
                 //System.out.println(cnt.Population+ " " + cnt.Region);
                 //System.out.println(cnt.Population+ " " + cnt.Continent);
-                System.out.println(cnt.Continent+ " " + cnt.Name+ " " + cnt.Population);
+
+                // Capital City population
+                City cCty = new City();
+                cCty.Name = rset.getString("Name");
+                cCty.Population = rset.getInt("Population");
+                // cCty.CountryCode = rset.getString("CountryCode");
+                Country cCountry = new Country();
+
+                cCountry.Name = rset.getString("CountryName");
+                System.out.println(cCty.Name +  " " + cCty.Population + " " + cCountry.Name);
 
                 country.add(cnt);
-
             }
 
             return country;
