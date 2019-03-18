@@ -18,15 +18,15 @@ public class AppIntegrationTest
     static void init()
     {
         app = new App();
-        //app.connect("db");
+
         app.connect("localhost:33060");
     }
 
-//    @Test
-//    void testGetCapital()
-//    {
-//        Country country = app.getCountryPopulation("103000");
-//        assertEquals(country.Population, "103000" );
-//        assertEquals(country.Name, "Aruba");
-//    }
+    @Test
+    void getCountryPopulationTesting()
+    {
+        ArrayList<Country> countries = app.getCountryPopulation();
+        assertEquals(countries.get(0).Population, "103000" );
+
+    }
 }
