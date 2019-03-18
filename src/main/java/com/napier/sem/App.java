@@ -17,9 +17,18 @@ public class App
 
     public static void main(String[] args)
     {
+        //create new application
         App a = new App();
 
-        a.connect("localhost:33060");
+        //Connect to database
+        if (args.length < 1)
+        {
+            a.connect("localhost:3306");
+        }
+        else
+        {
+            a.connect(args[0]);
+        }
 
         a.getAllCapital();
         a.getAllCapitalContinent("Asia");
