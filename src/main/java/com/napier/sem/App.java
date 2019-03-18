@@ -23,7 +23,7 @@ public class App
         //Connect to database
         if (args.length < 1)
         {
-            a.connect("localhost:3306");
+            a.connect("localhost:33060");
         }
         else
         {
@@ -289,7 +289,7 @@ public class App
     public void connect(String s) {
         try {
             // Load Database driver
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
@@ -300,9 +300,9 @@ public class App
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
-                Thread.sleep(50000);
+                Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false" + "/world?allowPublicKeyRetrieval=true&useSSL=false","root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + s + "/world?allowPublicKeyRetrieval=true&useSSL=false","root", "example");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
