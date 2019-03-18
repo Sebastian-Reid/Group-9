@@ -23,14 +23,13 @@ public class App
 
         a.getAllCapital();
         a.getAllCapitalContinent("Asia");
+        a.getRegionCapital("Caribbean");
         a.getCountryPopulation();
         a.getCountryRegionPopulation();
 
         a.disconnect();
 
-
     }
-
     public ArrayList<City> getAllCapital() {
         try {
             // Create an SQL statement
@@ -109,6 +108,51 @@ public class App
             System.out.println("Failed to get city details by continent");
             return null;
         }
+    }
+
+    // Get Capital Cities by Region
+    public ArrayList<City> getRegionCapital(String region)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            // ALl the capital cities in the WORLD organised by largest population to smallest
+            String strSelect =
+                    "SELECT city.Name, country.Name AS 'CountryName', city.Population "
+                            + "FROM country JOIN city "
+                            + "ON country.Code = city.CountryCode  "
+                            + "WHERE country.Capital = city.ID AND country.Region = " + "'" + region +"'"
+                            + " ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new capital city if valid.
+            // Check one is returned
+            ArrayList<City> capCity = new ArrayList<City>();
+            while (rset.next())
+            {
+                // Create new City (to store in database)
+                City cCty = new City();
+                cCty.Name = rset.getString("Name");
+                cCty.Population = rset.getInt("Population");
+
+                Country cCountry = new Country();
+                cCountry.Name = rset.getString("CountryName");
+                System.out.println(cCty.Name +  " " + cCty.Population + " " + cCountry.Name);
+
+                capCity.add(cCty);
+            }
+            return capCity;
+        }
+        catch (Exception e)
+        {
+            // Capital City not found.
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details by region");
+            return null;
+        }
+
     }
 
     //population of people in each REGION

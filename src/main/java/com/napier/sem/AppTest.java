@@ -14,6 +14,23 @@ public class AppTest
     }
 
     @Test
+    void getAllCapital()
+    {
+        app.getAllCapital();
+    }
+
+    @Test
+    void getAllCapitalContinent()
+    {
+        app.getAllCapitalContinent(null);
+    }
+
+    @Test
+    void getRegionCapital()
+    {
+        app.getRegionCapital(null);
+    }
+    @Test
 
     void getCountryTestNull()
     {
@@ -27,14 +44,5 @@ public class AppTest
         app.getCountryPopulation();
     }
 
-    @Test
-    void getAllCapital()
-    {
-        app.getAllCapital();
-    }
-    @Test
-    void getAllCapitalContinent()
-    {
-        app.getAllCapital();
-    }
+
 }
