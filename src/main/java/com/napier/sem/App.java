@@ -270,7 +270,7 @@ public class App
             catch (Exception e)
             {
                 System.out.println(e.getMessage());
-                System.out.println("No continent populations in array");
+                System.out.println("No continent populations in the array");
 
                 return null;
             }
