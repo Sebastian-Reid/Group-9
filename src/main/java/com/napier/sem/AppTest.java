@@ -9,6 +9,7 @@ public class AppTest
 
     @BeforeAll
     static void init()
+
     {
         app = new App();
     }
@@ -41,7 +42,14 @@ public class AppTest
 
     void getCountryRegionPopTest()
     {
-        app.getCountryPopulation();
+        app.getCountryRegionPopulation();
+    }
+
+    @Test
+
+    void getCountryContinentPopTest()
+    {
+        app.getContinentPopulation();
     }
 
 
