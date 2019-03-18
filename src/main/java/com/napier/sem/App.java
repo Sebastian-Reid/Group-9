@@ -69,12 +69,12 @@ public class App {
                             +"ORDER BY city.District, city.Population DESC" sql 11 */
 
             // All the capital cities in the WORLD organised by largest population to smallest
-            String strSelect =
+          /*  String strSelect =
                     "SELECT city.Name, country.name AS 'CountryName', city.Population "
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
                             + "WHERE country.Capital = city.ID "
-                            + "ORDER BY city.population DESC";
+                            + "ORDER BY city.population DESC"; */
 
             /*// All the capital cities by CONTINENT organised by largest population to smallest
             "String strSelect =
@@ -105,36 +105,37 @@ public class App {
                         " GROUP BY Region"; */
 
             //population of people in each COUNTRY
-            /*String strSelect =
+            String strSelect =
                     " SELECT  DISTINCT(country.Name) AS Name, SUM(country.Population) AS Population "
                             + " FROM country" +
-                            " GROUP BY Name"; */
+                            " GROUP BY Name";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
             ArrayList<Country> country = new ArrayList<Country>();
-            while (rset.next()) {
+            while (rset.next())
+            {
                 Country cnt = new Country();
 
-                cnt.Continent = rset.getString("Continent");
+                //cnt.Continent = rset.getString("Continent");
                 cnt.Population = (int) rset.getLong("Population");
-                //cnt.Name = rset.getString("Name");
+                cnt.Name = rset.getString("Name");
                 //cnt.Region = rset.getString("Region");
 
 
-                //System.out.println(cnt.Population + " " + cnt.Name);
+                System.out.println(cnt.Population + " " + cnt.Name);
                 //System.out.println(cnt.Population+ " " + cnt.Region);
                 //System.out.println(cnt.Population+ " " + cnt.Continent);
 
                 // Capital City population
-                City cCty = new City();
-                cCty.Name = rset.getString("Name");
-                cCty.Population = rset.getInt("Population");
+               // City cCty = new City();
+             //   cCty.Name = rset.getString("Name");
+             //   cCty.Population = rset.getInt("Population");
                 // cCty.CountryCode = rset.getString("CountryCode");
-                Country cCountry = new Country();
+              //  Country cCountry = new Country();
 
-                cCountry.Name = rset.getString("CountryName");
-                System.out.println(cCty.Name +  " " + cCty.Population + " " + cCountry.Name);
+        //        cCountry.Name = rset.getString("CountryName");
+               // System.out.println(cCty.Name +  " " + cCty.Population + " " + cCountry.Name);
 
                 country.add(cnt);
             }
