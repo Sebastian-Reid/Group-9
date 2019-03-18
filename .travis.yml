@@ -28,7 +28,7 @@ jobs:
     script: mvn test -Dtest=com.napier.sem.AppTest
   - stage: integration tests
     jdk: oraclejdk11
-    script: mvn test -Dtest=com.napier.sem.develop.AppIntegrationTest.java
+    script: mvn test -Dtest=com.napier.sem.AppIntegrationTest
   - stage: Deploy
     install: skip
     jdk: oraclejdk11
@@ -51,6 +51,3 @@ stages:
 - name: deploy
   if: branch = develop
 
-
-after_success:
-- bash <(curl -s https://codecov.io/bash)
