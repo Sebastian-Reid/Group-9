@@ -1,16 +1,16 @@
 package com.napier.sem;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.*;
 import java.util.ArrayList;
 
+@SpringBootApplication
+@RestController
 
 public class App
 {
@@ -23,24 +23,32 @@ public class App
         //Connect to database
         if (args.length < 1)
         {
-            a.connect("localhost:33060");
+            a.connect("localhost:35.234.140.108:3306");
         }
         else
         {
             a.connect(args[0]);
         }
+        SpringApplication.run(App.class, args);
 
-        a.getAllCapital();
-        a.getAllCapitalContinent("Asia");
-        a.getRegionCapital("Caribbean");
-        a.getCountryPopulation();
-        a.getCountryRegionPopulation();
-        a.getContinentPopulation();
+       // a.getAllCapital();
+        //a.getAllCapitalContinent("Asia");
+        //a.getRegionCapital("Caribbean");
+        //a.getCountryPopulation();
+        //a.getCountryRegionPopulation();
+       // a.getContinentPopulation();
 
         a.disconnect();
 
     }
-    public ArrayList<City> getAllCapital() {
+    /**
+     * Get a single employee record.
+     // @param  of the employee record to get.
+     * @return The record of the employee with emp_no or null if no employee exists.
+     */
+    /*
+    @RequestMapping("world")
+    public ArrayList<City> getAllCapital(@RequestParam(value="Name") String Name) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -76,7 +84,7 @@ public class App
             return null;
         }
     }
-
+    /*
     // Get all the capitals and populations within a continent
     public ArrayList<City> getAllCapitalContinent(String continent)
     {
@@ -203,7 +211,7 @@ public class App
         }
     }
 
-
+ */
     public ArrayList<Country> getCountryPopulation() {
         try {
             Statement stmt = con.createStatement();
@@ -237,6 +245,7 @@ public class App
             return null;
         }
     }
+    /*
         public ArrayList<Country> getContinentPopulation()
         {
             try
@@ -276,17 +285,17 @@ public class App
             }
         }
 
-
+    */
     /**
      * Connection to MySQL database.
      */
-    private Connection con = null;
+    private static Connection con = null;
 
     /**
      * Connect to the MySQL database.
      * @param s
      */
-    public void connect(String s) {
+    public static void connect(String s) {
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -318,7 +327,7 @@ public class App
     /**
      * Disconnect from the MySQL database.
      */
-    public void disconnect() {
+    public static void disconnect() {
         if (con != null) {
             try {
                 // Close connection
@@ -332,7 +341,6 @@ public class App
 
 
 }
-
 
 //All the countries in the WORLD organised by largest population to smallest.
             /*String strSelect =

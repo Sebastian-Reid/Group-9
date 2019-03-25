@@ -19,9 +19,10 @@ public class AppIntegrationTest
     {
         app = new App();
 
-        app.connect("localhost:33060");
+        app.connect("localhost:35.234.140.108:3306");
     }
 
+    /*
     @Test
     void getCountryPopulationTesting()
     {
@@ -29,4 +30,13 @@ public class AppIntegrationTest
         assertEquals(countries.get(0).Population, 103000 );
 
     }
+    */
+    /*
+    @Test
+    void getCapitalCity()
+    {
+        ArrayList<Country> countries = app.getAllCapital();
+        assertEquals(countries.get(0). Population, 103000);
+    }
+    */
 }
