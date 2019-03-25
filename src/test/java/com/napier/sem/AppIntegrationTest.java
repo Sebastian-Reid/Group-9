@@ -30,7 +30,7 @@ public class AppIntegrationTest
         assertEquals(countries.get(0).Population, 103000 );
 
     }
-    
+
     /*
     @Test
     void getCapitalCity()
