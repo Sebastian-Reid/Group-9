@@ -22,7 +22,7 @@ public class AppIntegrationTest
         app.connect("localhost:35.234.140.108:3306");
     }
 
-    /*
+
     @Test
     void getCountryPopulationTesting()
     {
@@ -30,7 +30,7 @@ public class AppIntegrationTest
         assertEquals(countries.get(0).Population, 103000 );
 
     }
-    */
+    
     /*
     @Test
     void getCapitalCity()
