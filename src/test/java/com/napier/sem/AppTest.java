@@ -103,6 +103,7 @@ public class AppTest
     {
         app.getRegionCapital(null);
     }
+
     @Test
 
     void getCountryTestNull()
