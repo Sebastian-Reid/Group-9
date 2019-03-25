@@ -15,6 +15,78 @@ public class AppTest
     }
 
     @Test
+    void getPopulationOrder() {
+        app.getPopulationOrder();
+    }
+
+    @Test
+    void getContinentPop() {
+        app.getContinentPop();
+    }
+
+    @Test
+    void getRegionPop() {
+        app.getRegionPop();
+    }
+
+ /*   @Test
+    void getNWorldPop() {
+        app.getNWorldPop();
+    }
+
+    @Test
+    void getNContinentPop() {
+        app.getNContinentPop();
+    }
+
+    @Test
+    void getNRegionPop() {
+        app.getNRegionPop();
+    }*/
+
+    @Test
+    void getPopCity() {
+        app.getPopCity();
+    }
+
+    @Test
+    void getCityPopCon() {
+        app.getCityPopCon();
+    }
+
+    @Test
+    void getPopCityReg() {
+        app.getPopCityReg();
+    }
+
+    @Test
+    void getPopCityCount()
+    {
+        app.getPopCityCount();
+    }
+
+    @Test
+    void getDiscPop()
+    {
+        app.getDiscPop();
+    }
+
+  /*  @Test
+    void getNPopCity() {
+        app.getNPopCity();
+    }
+
+    @Test
+    void getNPopCityCon() {
+        app.getNPopCityCon;
+    }
+
+    @Test
+    void getNPopCityReg() {
+        app.getNPopCityReg();
+    }*/
+
+    @Test
     void getAllCapital()
     {
         app.getAllCapital();
