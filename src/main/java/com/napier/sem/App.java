@@ -31,6 +31,7 @@ public class App
         }
         SpringApplication.run(App.class, args);
 
+        // SQL Statements
         // a.getPopulationOrder();
         // a.getContinentPop();
         // a.getPopCity();
@@ -46,7 +47,6 @@ public class App
         // a.getContinentPopulation();
 
         a.disconnect();
-
     }
 
      /*
