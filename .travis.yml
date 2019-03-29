@@ -85,19 +85,19 @@ jobs:
     # Authenticate against Google's Docker image manager.
     - gcloud auth configure-docker
     # Build the database image.
-    - docker build -t gcr.io/${PROJECT_ID}/db db/.
+    - docker build -t gcr.io/${voltaic-wall-235613}/db db/.
     # Push the database image.
-    - docker push gcr.io/${PROJECT_ID}/db
+    - docker push gcr.io/${voltaic-wall-235613}/db
     # Build the application
     - mvn package -DskipTests=true -Dmaven.javadoc.skip=true
     # Build the application image
-    - docker build -t gcr.io/${PROJECT_ID}/app .
+    - docker build -t gcr.io/${voltaic-wall-235613}/app .
     # Push the application image.
-    - docker push gcr.io/${PROJECT_ID}/app
+    - docker push gcr.io/${voltaic-wall-235613}/app
     # Build the web image.
-    - docker build -t gcr.io/${PROJECT_ID}/web web/.
+    - docker build -t gcr.io/${voltaic-wall-235613}/web web/.
     # Push the web image.
-    - docker push gcr.io/${PROJECT_ID}/web
+    - docker push gcr.io/${voltaic-wall-235613}/web
     # Create a container cluster.  We only need one node.
     - gcloud container clusters create hr-cluster --num-nodes=1
     # Tell kubernetes to run the built database image, opening port 3306
