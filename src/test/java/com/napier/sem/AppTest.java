@@ -13,7 +13,74 @@ public class AppTest
     {
         app = new App();
     }
- /*
+    /*
+    @Test
+    void getPopulationOrder() {
+        app.getPopulationOrder();
+    }
+
+    @Test
+    void getContinentPop() {
+        app.getContinentPop();
+    }
+
+    @Test
+    void getRegionPop() {
+        app.getRegionPop();
+    }
+
+   @Test
+    void getNWorldPop() {
+        app.getNWorldPop();
+    }
+    @Test
+    void getNContinentPop() {
+        app.getNContinentPop();
+    }
+    @Test
+    void getNRegionPop() {
+        app.getNRegionPop();
+    }
+
+    @Test
+    void getPopCity() {
+        app.getPopCity();
+    }
+
+    @Test
+    void getCityPopCon() {
+        app.getCityPopCon();
+    }
+
+    @Test
+    void getPopCityReg() {
+        app.getPopCityReg();
+    }
+
+    @Test
+    void getPopCityCount()
+    {
+        app.getPopCityCount();
+    }
+
+    @Test
+    void getDiscPop()
+    {
+        app.getDiscPop();
+    }
+    @Test
+    void getNPopCity() {
+        app.getNPopCity();
+    }
+    @Test
+    void getNPopCityCon() {
+        app.getNPopCityCon;
+    }
+    @Test
+    void getNPopCityReg() {
+        app.getNPopCityReg();
+    }
+
     @Test
     void getAllCapital()
     {
@@ -31,27 +98,23 @@ public class AppTest
     {
         app.getRegionCapital(null);
     }
-*/
+    */
     @Test
-
     void getCountryTestNull()
     {
         app.getCountryPopulation();
     }
-/*
+    /*
     @Test
-
-    void getCountryRegionPopTest()
-    {
-        app.getCountryRegionPopulation();
-    }
-
-    @Test
-
     void getCountryContinentPopTest()
     {
         app.getContinentPopulation();
     }
 
-*/
+    @Test
+    void getCountryRegionPopTest()
+    {
+        app.getCountryRegionPopulation();
+    }
+    */
 }
