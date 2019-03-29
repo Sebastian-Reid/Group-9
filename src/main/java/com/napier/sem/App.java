@@ -41,7 +41,7 @@ public class App
         // a.getAllCapital();
         // a.getAllCapitalContinent("Asia");
         // a.getRegionCapital("Caribbean");
-        a.getCountryPopulation();
+         a.getCountryPopulation();
         // a.getCountryRegionPopulation();
         // a.getContinentPopulation();
 
@@ -597,7 +597,7 @@ public class App
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
-                Thread.sleep(30000);
+                Thread.sleep(50000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://" + s + "/world?allowPublicKeyRetrieval=true&useSSL=false","root", "example");
                 System.out.println("Successfully connected");
