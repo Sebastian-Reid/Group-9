@@ -41,7 +41,7 @@ public class App
         // a.getAllCapital();
         // a.getAllCapitalContinent("Asia");
         // a.getRegionCapital("Caribbean");
-        // a.getCountryPopulation();
+         a.getCountryPopulation();
         // a.getCountryRegionPopulation();
         // a.getContinentPopulation();
 
