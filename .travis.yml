@@ -4,7 +4,7 @@ sudo: false
 
 addons:
   hosts:
-  - db
+  - db 
 
 env:
   global:
@@ -100,11 +100,11 @@ jobs:
     - docker push gcr.io/${voltaic-wall-235613}/web
     # Create a container cluster.  We only need one node.
     - gcloud container clusters create hr-cluster --num-nodes=1
-    # Tell kubernetes to run the built database image, opening port 3306
+    # Tell kubernetes to run the built database image, opening port 8080
     - kubectl run hr --image=gcr.io/${voltaic-wall-235613}/db --port 35.234.140.108:8080
     # Expose the app service
     - kubectl expose deployment app --name=app
-    # Tell kubernetes to run the built web image, opening port 80
+    # Tell kubernetes to run the built web image, opening port 8080
     - kubectl run web --image=gcr.io/${voltaic-wall-235613}/web --port 8080
     # Expose the web interface, mapping external port 80 to internal port 8080
     - kubectl expose deployment web --port=80 --target-port=8080 --type=LoadBalancer
@@ -125,4 +125,4 @@ before_install:
 # Decrypts the credentials file.
 # The keyname will be different for your project.
 - openssl aes-256-cbc -K $encrypted_4ee3913fdec0_key -iv $encrypted_4ee3913fdec0_iv
-  -in client-secret.json.enc -out client-secret.json -d
+-in client-secret.json.enc -out client-secret.json -d

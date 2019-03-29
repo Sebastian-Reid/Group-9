@@ -19,7 +19,7 @@ public class AppIntegrationTest
     {
         app = new App();
 
-        app.connect("localhost:35.234.140.108:80");
+        app.connect("localhost:35.234.140.108:8080");
     }
 
 
