@@ -18,7 +18,7 @@ install:
 # Build database image.
 - docker build -t database db/.
 # Run the database image.
-- docker run --rm -d -e MYSQL_ROOT_PASSWORD=example -p 35.234.140.108 database
+- docker run --rm -d -e MYSQL_ROOT_PASSWORD=example -p 35.234.140.108:80 database
 # Build and install the application.
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
@@ -101,7 +101,7 @@ jobs:
     # Create a container cluster.  We only need one node.
     - gcloud container clusters create hr-cluster --num-nodes=1
     # Tell kubernetes to run the built database image, opening port 3306
-    - kubectl run hr --image=gcr.io/${PROJECT_ID}/db --port 35.234.140.108
+    - kubectl run hr --image=gcr.io/${PROJECT_ID}/db --port 35.234.140.108:80
     # Expose the app service
     - kubectl expose deployment app --name=app
     # Tell kubernetes to run the built web image, opening port 80
