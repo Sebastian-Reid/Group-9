@@ -101,7 +101,7 @@ jobs:
     # Create a container cluster.  We only need one node.
     - gcloud container clusters create hr-cluster --num-nodes=1
     # Tell kubernetes to run the built database image, opening port 8080
-    - kubectl run db --image=gcr.io/${PROJECT_ID}/db --port 3306
+    - kubectl run db --image=gcr.io/${PROJECT_ID}/db --port 8080
     # Expose the app service
     - kubectl expose deployment app --name=app
     # Tell kubernetes to run the built web image, opening port 8080
