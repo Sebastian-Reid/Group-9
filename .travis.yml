@@ -59,9 +59,9 @@ jobs:
     deploy:
       provider: releases
       # Token saved on Travis.
-      api_key: $GITHUB_OAUTH_TOKEN
+      api_key: "$GITHUB_OAUTH_TOKEN"
       # File to add to the release.
-      file: $TRAVIS_BUILD_DIR/target/seMethods.jar
+      file: "$TRAVIS_BUILD_DIR/target/seMethods.jar"
       skip_cleanup: true
   - stage: Google Cloud Deploy
     install: skip
