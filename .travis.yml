@@ -103,7 +103,7 @@ jobs:
     # Tell kubernetes to run the built database image, opening port 3306
     - kubectl run hr --image=gcr.io/${PROJECT_ID}/db --port 3306
     # Expose the app service
-    - kubectl expose deployment app --name=app
+    - kubectl expose deployment app --name=world
     # Tell kubernetes to run the built web image, opening port 3306
     - kubectl run web --image=gcr.io/${PROJECT_ID}/web --port 3306
     # Expose the web interface, mapping external port 80 to internal port 3306
