@@ -18,7 +18,7 @@ install:
 # Build database image.
 - docker build -t database db/.
 # Run the database image.
-- docker run --rm -d -e MYSQL_ROOT_PASSWORD=example -p 35.234.140.108:8080
+- docker run --rm -d -e MYSQL_ROOT_PASSWORD=example -p 33060:3306 database
 # Build and install the application.
 - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
@@ -81,33 +81,33 @@ jobs:
     # Set the zone to work in.
     - gcloud config set compute/zone europe-west2-b
     # Assign project ID to a variable to make life easier
-    - export voltaic-wall-235613="$(gcloud config get-value project -q)"
+    - export PROJECT_ID="$(gcloud config get-value project -q)"
     # Authenticate against Google's Docker image manager.
     - gcloud auth configure-docker
     # Build the database image.
-    - docker build -t gcr.io/$voltaic-wall-235613/db db/.
+    - docker build -t gcr.io/${PROJECT_ID}/db db/.
     # Push the database image.
-    - docker push gcr.io/$voltaic-wall-235613/db
+    - docker push gcr.io/${PROJECT_ID}/db
     # Build the application
     - mvn package -DskipTests=true -Dmaven.javadoc.skip=true
     # Build the application image
-    - docker build -t gcr.io/$voltaic-wall-235613/app .
+    - docker build -t gcr.io/${PROJECT_ID}/app .
     # Push the application image.
-    - docker push gcr.io/$voltaic-wall-235613/app
+    - docker push gcr.io/${PROJECT_ID}/app
     # Build the web image.
-    - docker build -t gcr.io/$voltaic-wall-235613/web web/.
+    - docker build -t gcr.io/${PROJECT_ID}/web web/.
     # Push the web image.
-    - docker push gcr.io/$voltaic-wall-235613/web
+    - docker push gcr.io/${PROJECT_ID}/web
     # Create a container cluster.  We only need one node.
     - gcloud container clusters create hr-cluster --num-nodes=1
     # Tell kubernetes to run the built database image, opening port 8080
-    - kubectl run hr --image=gcr.io/$voltaic-wall-235613/db --port 35.234.140.108:8080
+    - kubectl run hr --image=gcr.io/${PROJECT_ID}/db --port 35.234.140.108:8080
     # Expose the app service
     - kubectl expose deployment app --name=app
     # Tell kubernetes to run the built web image, opening port 8080
-    - kubectl run web --image=gcr.io/$voltaic-wall-235613/web --port 8080
+    - kubectl run web --image=gcr.io/${PROJECT_ID}/web --port 3306
     # Expose the web interface, mapping external port 80 to internal port 8080
-    - kubectl expose deployment web --port=80 --target-port=8080 --type=LoadBalancer
+    - kubectl expose deployment web --port=3306 --target-port=3306 --type=LoadBalancer
 
 stages:
 - unit tests
