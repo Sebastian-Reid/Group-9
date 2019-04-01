@@ -29,9 +29,9 @@
 </body>
 <script>
     var urlParams = new URLSearchParams(window.location.search);
-    var title = urlParams.get('name');
+    //var title = urlParams.get();
 
-    var URL = "http://" + window.location.hostname + "/countries_population?title=" + title;
+    var URL = "http://" + window.location.hostname + "country_population";
 
     $.getJSON(URL, function(data) {
         // EXTRACT VALUE FOR HTML HEADER.
