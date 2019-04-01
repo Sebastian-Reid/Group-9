@@ -22,7 +22,6 @@ public class AppIntegrationTest
         app.connect("localhost:33060");
     }
 
-
     @Test
     void getCountryPopulationTesting()
     {
