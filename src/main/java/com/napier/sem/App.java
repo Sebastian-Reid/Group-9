@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+//import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,7 @@ public class App
         SpringApplication.run(App.class, args);
 
         // SQL Statements
-        // a.getPopulationOrder();
+        a.getPopulationOrder();
         // a.getContinentPop();
         // a.getPopCity();
         // a.getCityPopCon();
@@ -49,7 +50,7 @@ public class App
         a.disconnect();
     }
 
-     /*
+
     // All the countries in the world organised by largest population to smallest
     public ArrayList<Country> getPopulationOrder() {
         try {
@@ -84,6 +85,7 @@ public class App
         }
     }
 
+    /*
     // All the countries in a continent organised by largest population to smallest.
     public ArrayList<Country> getContinentPop() {
         try {
@@ -461,6 +463,7 @@ public class App
     }
     */
     // The population of people, people living in cities, and people not living in cities in each continent.
+    @RequestMapping("country_population")
     public ArrayList<Country> getCountryPopulation() {
         try {
             Statement stmt = con.createStatement();

@@ -31,7 +31,7 @@
     var urlParams = new URLSearchParams(window.location.search);
     var title = urlParams.get('name');
 
-    var URL = "http://35.242.132.5/countries_population?title=" + title;
+    var URL = "http://" + window.location.hostname + "/countries_population?title=" + title;
 
     $.getJSON(URL, function(data) {
         // EXTRACT VALUE FOR HTML HEADER.

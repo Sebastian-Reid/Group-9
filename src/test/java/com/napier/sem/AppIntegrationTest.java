@@ -32,7 +32,7 @@ public class AppIntegrationTest
 
     /*
     @Test
-    void getCapitalCity()
+    void getCapitalCityTesting()
     {
         ArrayList<Country> countries = app.getAllCapital();
         assertEquals(countries.get(0). Population, 103000);
