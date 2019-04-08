@@ -122,7 +122,7 @@ stages:
   if: branch = master
 
 after_success:
-# Push code coverage data to codecov.
+# Push code coverage data to codecov. 
 - bash <(curl -s https://codecov.io/bash)
 
 before_install:
