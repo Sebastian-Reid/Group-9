@@ -7,5 +7,6 @@ License [![LICENSE](https://img.shields.io/github/license/Sebastian-Reid/sem.svg
 
 Release [![Releases](https://img.shields.io/github/release/Sebastian-Reid/sem/all.svg?style=flat-square)](https://github.com/Sebastian-Reid/sem/releases)
 
+[![codecov](https://codecov.io/gh/Sebastian-Reid/Group-9/branch/master/graph/badge.svg)](https://codecov.io/gh/Sebastian-Reid/Group-9)
 
 
