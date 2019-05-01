@@ -27,11 +27,12 @@
 <body>
 <div class="showData">Waiting</div>
 </body>
+
 <script>
     var urlParams = new URLSearchParams(window.location.search);
-    //var title = urlParams.get();
+    var title = urlParams.get('title');
 
-    var URL = "http://" + window.location.hostname + "country_population";
+    var URL = "http://" + window.location.hostname + "/app/country_population?title=" + title;
 
     $.getJSON(URL, function(data) {
         // EXTRACT VALUE FOR HTML HEADER.
