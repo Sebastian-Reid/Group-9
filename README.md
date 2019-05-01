@@ -2,6 +2,12 @@
 
 The design and implementation of a new system to allow easy access to population information provided in an SQL database
 
+## Team Members
+- Emily Taylor
+- Amelia Handley
+- Sebastian Reid
+- Conor Willis
+
 # Badges
 
 Master Build Status [![Build Status](https://travis-ci.org/Sebastian-Reid/Group-9.svg?branch=master)](https://travis-ci.org/Sebastian-Reid/Group-9)
