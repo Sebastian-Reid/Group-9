@@ -35,7 +35,7 @@ public class App
         // SQL Statements
         a.getPopulationOrder();
         // a.getContinentPop();
-        // missing one here
+        // missing one here for statement
         // a.getPopCity();
         // a.getCityPopCon();
         // a.getPopCityReg();
