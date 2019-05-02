@@ -10,7 +10,7 @@ public class City {
 
     public String District;
 
-    public int Population;
+    public Long Population;
 
 
     public String cName;

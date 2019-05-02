@@ -10,9 +10,7 @@ public class App
         App a = new App();
 
         a.connect();
-
-        ArrayList<Country> country = a.getCountry();
-
+        a.getCountry();
         a.disconnect();
     }
 
@@ -29,16 +27,18 @@ public class App
           */
 
 
-            /*
-            String strSelect =
-                " SELECT country.Continent, SUM(city.Population) AS Population, city.Name " +
-                        " FROM country JOIN city ON country.Code = city.CountryCode " +
-                        " GROUP BY Continent, Name "; */ //population of people in cities in each continent
 
-            /* String strSelect =
-                   " SELECT DISTINCT(country.Continent) AS Continent, SUM(country.Population) AS Population "
-                + " FROM country" +
-                           " GROUP BY Continent"; */ //population of people in each continent
+            String strSelect =
+                " SELECT DISTINCT(country.Continent) AS Continent, country.Name AS cntName, SUM(country.Population) AS Population, SUM(city.Population) AS cPopulation, city.Name AS cName" +
+                        " FROM city JOIN country ON country.Code = city.CountryCode " +
+                        " WHERE country.Code = city.CountryCode"+
+                        " GROUP BY Continent, cName, country.Name " +//population of people in cities in each continent
+                        " ORDER BY Continent DESC LIMIT 3";
+
+
+                  // " SELECT DISTINCT(country.Continent) AS Continent, SUM(country.Population) AS Population "
+                  // + " FROM country" +
+                  //         " GROUP BY Continent"; //population of people in each continent
 
 
             /* String strSelect =
@@ -58,44 +58,47 @@ public class App
                             + " FROM country" +
                             " GROUP BY Name"; */  //population of people in each country
 
-
+            /*
             String strSelect =
                     " SELECT country.Name, SUM(city.Population) AS Population, city.Name AS cName" +
                             " FROM country JOIN city ON country.Code = city.CountryCode " +
-                            " GROUP BY Name, cName ";  //population of people in each city in each country
+                            " GROUP BY Name, cName "; */ //population of people in each city in each country
 
 
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
             ArrayList<Country> country = new ArrayList<Country>();
-            ArrayList<City> city = new ArrayList<City>();
+
             while(rset.next())
             {
                 Country cnt = new Country();
-                City cCity = new City();
-
-                cCity.Name = rset.getString("cName");
-                //cnt.Continent = rset.getString("Continent");
+                cnt.Continent = rset.getString("Continent");
                 cnt.Population = rset.getLong("Population");
-                cnt.Name = rset.getString("Name");
+                cnt.Name = rset.getString("cntName");
+
+                City cCity = new City();
+                cCity.Name = rset.getString("cName");
+                cCity.Population = rset.getLong("cPopulation");
+
+
+
                 //cnt.Region = rset.getString("Region");
 
-
-
-                //System.out.println(cnt.Population+ " " + cnt.Continent);
+                //  System.out.println(cnt.Population+ " " + cnt.Continent);
                 //System.out.println(cnt.Population+ " " + cnt.Region);
-                //System.out.println(cnt.Name + " " + cnt.Population  + " " + cnt.Continent);
+                System.out.println(cnt.Name + " " + cnt.Population  + " " + cnt.Continent + " " + cCity.Population + " " + cCity.Name);
                // System.out.println(cnt.Name + " " + cnt.Population + " " + cnt.Region);
-                System.out.println(cCity.cName + " " + cnt.Population + " " + cnt.Name);
+               // System.out.println(cCity.cName + " " + cnt.Population + " " + cnt.Name);
 
                 country.add(cnt);
-
 
 
             }
 
             return country;
+
+
         }
         catch(Exception e)
         {
