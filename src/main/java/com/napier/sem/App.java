@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @RestController
 
 public class App
-{ 
+{
 
     public static void main(String[] args)
     {
@@ -34,23 +34,21 @@ public class App
 
         // SQL Statements
         a.getPopulationOrder();
-        // a.getContinentPop();
-        // missing one here for statement
-        // a.getPopCity();
-        // a.getCityPopCon();
-        // a.getPopCityReg();
-        // a.getPopCityCount();
-        // a.getDiscPop();
-        // a.getAllCapital();
-        // a.getAllCapitalContinent("Asia");
-        // a.getRegionCapital("Caribbean");
-         a.getCountryPopulation();
-        // a.getCountryRegionPopulation();
-        // a.getContinentPopulation();
+        a.getContinentPop();
+        a.getPopCity();
+        a.getCityPopCon();
+        a.getPopCityReg();
+        a.getPopCityCount();
+        a.getDiscPop();
+        a.getAllCapital();
+        a.getAllCapitalContinent("Asia");
+        a.getRegionCapital("Caribbean");
+        a.getCountryPopulation();
+        a.getCountryRegionPopulation();
+        a.getContinentPopulation();
 
         a.disconnect();
     }
-
 
     // 1. All the countries in the WORLD organised by largest population to smallest
     public ArrayList<Country> getPopulationOrder() {
@@ -86,7 +84,6 @@ public class App
         }
     }
 
-    /*
     // 2. All the countries in a CONTINENT organised by largest population to smallest.
     public ArrayList<Country> getContinentPop() {
         try {
@@ -263,8 +260,6 @@ public class App
             return null;
         }
     }
-
-
     // 10. All the cities in a COUNTRY organised by largest population to smallest.
     public ArrayList<City> getPopCityCount() {
         try {
@@ -301,7 +296,6 @@ public class App
         }
     }
 
-
     // 11. All the cities in a DISTRICT organised by largest population to smallest.
     public ArrayList<City> getDiscPop() {
         try {
@@ -337,8 +331,8 @@ public class App
     }
 
     // 17. All the capital cities in the WORLD organised by largest population to smallest.
-    @RequestMapping("world")
-    public ArrayList<City> getAllCapital(@RequestParam(value="Name") String Name) {
+    //@RequestMapping("world")
+    public ArrayList<City> getAllCapital() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -502,6 +496,8 @@ public class App
                 return null;
             }
         }
+
+        /*
         // ii. Population of people living in cities in each CONTINENT
         try
         {
@@ -528,7 +524,6 @@ public class App
 
                     continentRegionPop.add(cnt);
                 }
-
                 return continentRegionPop;
             }
             catch (Exception e)
@@ -540,8 +535,7 @@ public class App
             }
         }
         // iii. Population of people not living in cities in each CONTINENT
-
-    }
+        */
 
     // 24. The population of people, people living in cities, and people not living in cities in each REGION.
     public ArrayList<Country> getCountryRegionPopulation()
@@ -580,14 +574,14 @@ public class App
             System.out.println("No region populations in array");
             return null;
         }
-
+        /*
         // ii. The population of people living in cities in each REGION
         try
         {
             Statement stmt = con.createStatement();
 
             String strSelect =
-                    " SELECT country.Region, SUM(city.Population) AS Population, city.Name"  "
+                    " SELECT country.Region, SUM(city.Population) AS Population, city.Name"
                             + " FROM country JOIN city ON country.Code = city.CountryCode"
                             + " GROUP BY Region, Name ";
 
@@ -616,8 +610,9 @@ public class App
         }
 
         //iii. Population of people not living in cities in each REGION
+        */
     }
-    */
+
     // 25. The population of people, people living in cities, and people not living in cities in each COUNTRY.
     @RequestMapping("country_population")
     public ArrayList<Country> getCountryPopulation() {
