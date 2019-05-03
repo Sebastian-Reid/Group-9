@@ -362,7 +362,9 @@ public class App
                 // cCty.CountryCode = rset.getString("CountryCode");
                 Country cCountry = new Country();
                 cCountry.Name = rset.getString("CountryName");
-                System.out.println(cCty.Name + " " + cCty.Population + " " + cCountry.Name);
+                System.out.println("Capital City | Population | Country");
+                System.out.println(cCty.Name + " | " + cCty.Population + " | " + cCountry.Name);
+                System.out.println("/n");
                 capCity.add(cCty);
             }
             return capCity;
