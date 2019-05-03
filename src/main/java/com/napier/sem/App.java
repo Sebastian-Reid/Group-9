@@ -409,7 +409,6 @@ public class App
 
                 Country cCountry = new Country();
                 cCountry.Name = rset.getString("CountryName");
-                cCountry.Continent = rset.getString("continent");
                 System.out.println(cCty.Name +  " | " + cCty.Population + " | " + cCountry.Name);
                 capCity.add(cCty);
             }
