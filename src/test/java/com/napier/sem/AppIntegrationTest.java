@@ -50,7 +50,7 @@ public class AppIntegrationTest
     void getPopCityTesting()
     {
         ArrayList<City> cities = app.getPopCity();
-        assertEquals(cities.get(0). Population, 10500000);
+        assertEquals(cities .get(0). Population, 10500000);
     }
     // 17. Test for Seoul
     @Test

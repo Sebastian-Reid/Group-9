@@ -169,7 +169,7 @@ public class App
             String strSelect =
                     "SELECT city.Name, city.Population"
                             +" FROM city"
-                            +" ORDER BY city.Population DESC";
+                            +" ORDER BY city.Population DESC LIMIT 3";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
