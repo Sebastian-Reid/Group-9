@@ -28,18 +28,22 @@ public class App
 
 
 
-            String strSelect =
+            /* String strSelect =
                 " SELECT DISTINCT(country.Continent) AS Continent, country.Name AS cntName, SUM(country.Population) AS Population, SUM(city.Population) AS cPopulation, city.Name AS cName" +
-                        " FROM city JOIN country ON country.Code = city.CountryCode " +
+                        " FROM country JOIN city ON country.Code = city.CountryCode" +
                         " WHERE country.Code = city.CountryCode"+
-                        " GROUP BY Continent, cName, country.Name " +//population of people in cities in each continent
-                        " ORDER BY Continent DESC LIMIT 3";
+                        " GROUP BY Continent, cName, cntName ";*/ //population of people in cities in each continent
 
 
-                  // " SELECT DISTINCT(country.Continent) AS Continent, SUM(country.Population) AS Population "
-                  // + " FROM country" +
-                  //         " GROUP BY Continent"; //population of people in each continent
 
+                  String strSelect = " SELECT DISTINCT(country.Continent) AS dContinent, SUM(DISTINCT country.Population) AS coPopulation, SUM(city.Population) AS cPopulation" +
+                          " FROM country JOIN city ON country.Code = city.CountryCode" +
+                          " WHERE country.Code = city.CountryCode" +
+                         " GROUP BY dContinent"; //population of people in each continent
+
+            /* String strSelect = " SELECT DISTINCT(country.Continent) AS Continent, SUM(country.Population) AS Population "
+                    + " FROM country" +
+                    " GROUP BY Continent"; */ //population of people in each continent
 
             /* String strSelect =
                 " SELECT  DISTINCT(country.Region) AS Region, SUM(country.Population) AS Population "
@@ -73,22 +77,26 @@ public class App
             while(rset.next())
             {
                 Country cnt = new Country();
-                cnt.Continent = rset.getString("Continent");
-                cnt.Population = rset.getLong("Population");
-                cnt.Name = rset.getString("cntName");
+                cnt.Continent = rset.getString("dContinent");
+                cnt.Population = rset.getLong("coPopulation");
+              //  cnt.Name = rset.getString("cntName");
 
                 City cCity = new City();
                 //cCity.Name = rset.getString("cName");
                 cCity.Population = rset.getLong("cPopulation");
 
 
+                System.out.println(cnt.Continent + " " + cnt.Population + " " + cCity.Population);
+
 
                 //cnt.Region = rset.getString("Region");
 
-                //  System.out.println(cnt.Population+ " " + cnt.Continent);
+                 // System.out.println(cnt.Population+ " " + cnt.Continent);
                 //System.out.println(cnt.Population+ " " + cnt.Region);
                // System.out.println(cnt.Name + " " + cnt.Population  + " " + cnt.Continent + " " + cCity.Population + " " + cCity.Name);
-                System.out.println(cnt.Continent + " " + cnt.Name + " " + (((cCity.Population) / (cnt.Population)) *100) + " " + (cnt.Population - cCity.Population));
+            //    System.out.println(cnt.Continent + " Total population of continent - " + cnt.Population +
+              //         " Percentage of people in cities - " + (((cCity.Population) / (cnt.Population)) * 100) +
+               //        " Percentage of people not in cities - " + (cnt.Population - cCity.Population));
                // System.out.println(cnt.Name + " " + cnt.Population + " " + cnt.Region);
                // System.out.println(cCity.cName + " " + cnt.Population + " " + cnt.Name);
 
