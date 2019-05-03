@@ -117,7 +117,7 @@ public class AppTest
 
     // 23. The population of people, people living in cities, and people not living in cities in each continent
     @Test
-    void getCountryTestNull()
+    void getContinentPopulation()
     {
         app.getCountryPopulation();
     }
