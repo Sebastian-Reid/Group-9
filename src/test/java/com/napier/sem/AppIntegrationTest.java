@@ -30,21 +30,21 @@ public class AppIntegrationTest
         assertEquals(countries .get(0). Population, 1277558000);
     }
     /*
-    //2. Test for Continent
+    //2. Test for Continent (Asia - China)
     @Test
     void getContinentPopTesting()
     {
         ArrayList<Country> countries = app.getContinentPop();
         assertEquals(countries .get(0). Population, 1277558000);
     }
-    // 3.
+    // 3. Test for region
     @Test
     void getRegionPopTesting()
     {
         ArrayList<Country> countries = app.getRegionPop();
         assertEquals(countries.get(0). Population, actual 1277558000);
     }
-    // 7. Test for Mumbai
+    // 7. Test for World (Mumbai)
     @Test
     void getPopCityTesting()
     {
@@ -52,20 +52,21 @@ public class AppIntegrationTest
         assertEquals(cities .get(0). Population, 10500000);
     }
 
-    // 8. Test for
+    // 8. Test for Continent
     @Test
     void getCityPopConTesting()
     {
         ArrayList<City> cities = app.getCityPopCon();
         assertEquals(cities .get(0). Population, 10500000);
     }
-    // 9. Test
+    // 9. Test for Region
     @Test
     void getPopCityRegTesting()
     {
         ArrayList<City> cities = app.getPopCityReg();
         assertEquals(cities .get(0). Population, 10500000);
     }
+    // 10.
     */
     // 17. Test for Seoul
     @Test
