@@ -22,7 +22,7 @@ public class AppIntegrationTest
         app.connect("localhost:33060");
     }
 
-    // 17. Test for Kabul
+    // 17. Test for Seoul
     @Test
     void getAllCapitalCityTesting()
     {
@@ -35,7 +35,7 @@ public class AppIntegrationTest
     void getCountryPopulationTesting()
     {
         ArrayList<Country> countries = app.getCountryPopulation();
-        assertEquals(countries.get(0).Population, 1780000 );
+        assertEquals(countries.get(0).Population, 170115000 );
 
     }
 }
