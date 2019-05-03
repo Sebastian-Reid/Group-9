@@ -51,6 +51,7 @@ public class App
     }
 
     // 1. All the countries in the WORLD organised by largest population to smallest
+    @RequestMapping("world_population")
     public ArrayList<Country> getPopulationOrder() {
         try {
             // Create an SQL statement

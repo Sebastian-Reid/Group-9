@@ -22,28 +22,36 @@ public class AppIntegrationTest
         app.connect("localhost:33060");
     }
 
+    // 1. Test for China
+    @Test
+    void getPopulationOrderTesting()
+    {
+        ArrayList<Country> countries = app.getPopulationOrder();
+        assertEquals(countries .get(0). Population, 1277558000);
+    }
+    //2.
     // 17. Test for Seoul
     @Test
     void getAllCapitalCityTesting()
     {
-        ArrayList<City> countries = app.getAllCapital();
-        assertEquals(countries.get(0). Population, 9981619);
+        ArrayList<City> capCity = app.getAllCapital();
+        assertEquals(capCity .get(0). Population, 9981619);
     }
 
-    // 18. Test for  Seoul
+    // 18. Test for Asia (result: Seoul)
     @Test
     void getContinentCapitalCityTesting()
     {
-        ArrayList<City> counties = app.getAllCapitalContinent("Asia");
-        assertEquals(counties.get(0). Population, 9981619);
+        ArrayList<City> capCity  = app.getAllCapitalContinent("Asia");
+        assertEquals(capCity .get(0). Population, 9981619);
     }
 
-    // 19. Test for Seoul
+    // 19. Test for Caribbean (Result: ... )
     @Test
     void getRegionCapitalCityTesting()
     {
-        ArrayList<City> counties = app.getRegionCapital("Caribbean");
-        assertEquals(counties.get(0). Population, 307000);
+        ArrayList<City> capCity  = app.getRegionCapital("Caribbean");
+        assertEquals(capCity .get(0). Population, 2256000);
     }
 
     // 23. Test for Brazil
