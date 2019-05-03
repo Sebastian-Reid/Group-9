@@ -19,7 +19,7 @@ public class AppTest
     void getPopulationOrder() {
         app.getPopulationOrder();
     }
-
+    /*
     // 2. All the countries in the continent organised by largest population to smallest
     @Test
     void getContinentPop() {
@@ -31,6 +31,7 @@ public class AppTest
     void getRegionPop() {
         app.getRegionPop();
     }
+    */
 
     /*
    @Test

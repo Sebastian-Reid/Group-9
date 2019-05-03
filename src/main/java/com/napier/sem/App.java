@@ -34,7 +34,8 @@ public class App
 
         // SQL Statements
         a.getPopulationOrder();
-        a.getContinentPop();
+        //a.getContinentPop();
+        //a.getRegionOrder();
         a.getPopCity();
         a.getCityPopCon();
         a.getPopCityReg();
@@ -85,6 +86,7 @@ public class App
         }
     }
 
+    /*
     // 2. All the countries in a CONTINENT organised by largest population to smallest.
     public ArrayList<Country> getContinentPop() {
         try {
@@ -154,8 +156,10 @@ public class App
             return null;
         }
     }
+    */
 
     // 7. All the cities in the WORLD organised by largest population to smallest.
+    @RequestMapping("world_city_population")
     public ArrayList<City> getPopCity() {
         try {
             // Create an SQL statement
