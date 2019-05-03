@@ -354,6 +354,7 @@ public class App
             // Return new capital city if valid.
             // Check one is returned
             ArrayList<City> capCity = new ArrayList<City>();
+            System.out.println("Capital City | Population | Country");
             while (rset.next()) {
                 // Create new City (to store in database)
                 City cCty = new City();
@@ -362,11 +363,10 @@ public class App
                 // cCty.CountryCode = rset.getString("CountryCode");
                 Country cCountry = new Country();
                 cCountry.Name = rset.getString("CountryName");
-                System.out.println("Capital City | Population | Country");
                 System.out.println(cCty.Name + " | " + cCty.Population + " | " + cCountry.Name);
-                System.out.println("/n");
                 capCity.add(cCty);
             }
+            System.out.println("\n");
             return capCity;
         } catch (Exception e) {
             // Capital City not found.
@@ -374,6 +374,7 @@ public class App
             System.out.println("Failed to get city details");
             return null;
         }
+
     }
 
     // 18. All the capital cities in a CONTINENT organised by largest population to smallest. (Continent = 'Asia')
