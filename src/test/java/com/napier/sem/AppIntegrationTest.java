@@ -27,7 +27,7 @@ public class AppIntegrationTest
     void getAllCapitalCityTesting()
     {
         ArrayList<City> countries = app.getAllCapital();
-        assertEquals(countries.get(0). Population, 1780000);
+        assertEquals(countries.get(0). Population, 9981619);
     }
 
     // 23. Test for Aruba
@@ -35,7 +35,7 @@ public class AppIntegrationTest
     void getCountryPopulationTesting()
     {
         ArrayList<Country> countries = app.getCountryPopulation();
-        assertEquals(countries.get(0).Population, 9981619 );
+        assertEquals(countries.get(0).Population, 1780000 );
 
     }
 }
