@@ -96,7 +96,7 @@ public class App
                     "SELECT country.Continent, country.Name, SUM(country.Population)"
                             + " FROM country"
                             + " GROUP BY country.Continent, country.Name"
-                            + " ORDER BY county.Continent, SUM(country.Population) DESC LIMIT 3";
+                            + " ORDER BY country.Continent, SUM(country.Population) DESC LIMIT 3";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
