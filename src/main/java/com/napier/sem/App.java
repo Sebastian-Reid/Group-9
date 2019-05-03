@@ -61,7 +61,7 @@ public class App
             String strSelect =
                     "SELECT country.Name, country.Population"
                             + " FROM country"
-                            + " ORDER BY Population DESC";
+                            + " ORDER BY Population DESC LIMIT 3";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -96,7 +96,7 @@ public class App
                     "SELECT country.Continent, country.Name, SUM(country.Population)"
                             + " FROM country"
                             + " GROUP BY country.Continent, country.Name"
-                            + " ORDER BY county.Continent, SUM(country.Population) DESC";
+                            + " ORDER BY county.Continent, SUM(country.Population) DESC LIMIT 3";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -105,9 +105,9 @@ public class App
             while (rset.next()) {
                 // Create new Country (to store in database)
                 Country cnt = new Country();
-                cnt.Name = rset.getString("CountryName");
-                cnt.Population = rset.getInt("CountryPopulation");
-                cnt.Continent = rset.getString("CountryContinent");
+                cnt.Name = rset.getString("Name");
+                cnt.Population = rset.getInt("Population");
+                cnt.Continent = rset.getString("Continent");
                 System.out.println(cnt.Continent + " " + cnt.Name + " " + cnt.Population);
                 ContPop.add(cnt);
             }
