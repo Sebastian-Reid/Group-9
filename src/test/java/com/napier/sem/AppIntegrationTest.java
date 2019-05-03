@@ -22,6 +22,15 @@ public class AppIntegrationTest
         app.connect("localhost:33060");
     }
 
+    // 17. Test for Kabul
+    @Test
+    void getAllCapitalCityTesting()
+    {
+        ArrayList<City> countries = app.getAllCapital();
+        assertEquals(countries.get(0). Population, 1780000);
+    }
+
+    // 23. Test for Aruba
     @Test
     void getCountryPopulationTesting()
     {
@@ -29,13 +38,4 @@ public class AppIntegrationTest
         assertEquals(countries.get(0).Population, 103000 );
 
     }
-
-    /*
-    @Test
-    void getCapitalCityTesting()
-    {
-        ArrayList<Country> countries = app.getAllCapital();
-        assertEquals(countries.get(0). Population, 103000);
-    }
-    */
 }

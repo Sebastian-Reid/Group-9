@@ -332,6 +332,7 @@ public class App
 
     // 17. All the capital cities in the WORLD organised by largest population to smallest.
     //@RequestMapping("world")
+    @RequestMapping("all_city_population")
     public ArrayList<City> getAllCapital() {
         try {
             // Create an SQL statement
@@ -622,68 +623,38 @@ public class App
 
             //population of people in each COUNTRY
             String strSelect =
-                    " SELECT  DISTINCT(country.Name) AS Name, SUM(country.Population) AS Population "
-                            + " FROM country" +
-                            " GROUP BY Name";
+                    " SELECT DISTINCT(country.Continent) AS Continent, country.Name AS cntName, SUM(country.Population) AS Population, SUM(city.Population) AS cPopulation, city.Name AS cName" +
+                            " FROM city JOIN country ON country.Code = city.CountryCode " +
+                            " WHERE country.Code = city.CountryCode"+
+                            " GROUP BY Continent, cName, country.Name " +//population of people in cities in each continent
+                            " ORDER BY Continent DESC LIMIT 3";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
-            ArrayList<Country> countryPopulation = new ArrayList<Country>();
-            while (rset.next()) {
+            ArrayList<Country> country = new ArrayList<Country>();
+
+            while(rset.next())
+            {
                 Country cnt = new Country();
+                cnt.Continent = rset.getString("Continent");
+                cnt.Population = rset.getInt("Population");
+                cnt.Name = rset.getString("cntName");
 
-                cnt.Population = (int) rset.getLong("Population");
-                cnt.Name = rset.getString("Name");
+                City cCity = new City();
+                cCity.Name = rset.getString("cName");
+                cCity.Population = rset.getInt("cPopulation");
 
+                System.out.println(cnt.Name + " " + cnt.Population  + " " + cnt.Continent + " " + cCity.Population + " " + cCity.Name);
 
-                System.out.println(cnt.Population + " " + cnt.Name);
-
-                countryPopulation.add(cnt);
+                country.add(cnt);
             }
-
-            return countryPopulation;
+            return country;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("No country populations in array");
 
             return null;
         }
-        /*
-        // ii. Population of people living in cities in each COUNTRY
-        try {
-            Statement stmt = con.createStatement();
-
-            //population of people in each COUNTRY
-            String strSelect =
-                    " SELECT country.Name, SUM(city.Population) AS Population, city.Name AS cName"
-                            + " FROM country JOIN city ON country.Code = city.CountryCode "
-                            + " GROUP BY Name, cName ";
-
-            ResultSet rset = stmt.executeQuery(strSelect);
-
-            ArrayList<Country> countryPopulation = new ArrayList<Country>();
-            while (rset.next()) {
-                Country cnt = new Country();
-
-                cnt.Population = (int) rset.getLong("Population");
-                cnt.Name = rset.getString("Name");
-
-
-                System.out.println(cnt.Population + " " + cnt.Name);
-
-                countryPopulation.add(cnt);
-            }
-
-            return countryPopulation;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("No country populations in array");
-
-            return null;
-        }
-
-        // iii. Population of people not living in cities in each COUNTRY
-        */
     }
 
     /**
