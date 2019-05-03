@@ -344,7 +344,7 @@ public class App
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
                             + "WHERE country.Capital = city.ID "
-                            + "ORDER BY city.population DESC";
+                            + "ORDER BY city.population DESC LIMIT 3";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.

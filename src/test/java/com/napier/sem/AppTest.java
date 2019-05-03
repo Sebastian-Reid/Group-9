@@ -99,6 +99,7 @@ public class AppTest
         app.getAllCapital();
     }
 
+
     // 18. All the capital cities in a continent organised by largest population to smallest
     @Test
     void getAllCapitalContinent()

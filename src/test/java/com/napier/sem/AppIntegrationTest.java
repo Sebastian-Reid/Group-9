@@ -35,7 +35,7 @@ public class AppIntegrationTest
     void getCountryPopulationTesting()
     {
         ArrayList<Country> countries = app.getCountryPopulation();
-        assertEquals(countries.get(0).Population, 103000 );
+        assertEquals(countries.get(0).Population, 9981619 );
 
     }
 }
