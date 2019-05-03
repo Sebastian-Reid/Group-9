@@ -73,7 +73,7 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             ArrayList<Country> country = new ArrayList<Country>();
-            System.out.println(" Continent | Continent Pop | City Pop | City Pop % | Not a City Pop | Not a City %");
+            System.out.println(" Continent | Continent Pop | City Pop | City Pop % | Not a City Pop | Not a City Pop %");
             while(rset.next())
             {
                 Country cnt = new Country();
