@@ -73,7 +73,7 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             ArrayList<Country> country = new ArrayList<Country>();
-
+            System.out.println(" Continent | Continent Pop | City Pop | City Pop % | Not a City Pop | Not a City %");
             while(rset.next())
             {
                 Country cnt = new Country();
@@ -86,7 +86,7 @@ public class App
                 cCity.Population = rset.getLong("cPopulation");
 
 
-                System.out.println(cnt.Continent + " " + cnt.Population + " " + cCity.Population);
+                System.out.println(cnt.Continent + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
 
 
                 //cnt.Region = rset.getString("Region");
