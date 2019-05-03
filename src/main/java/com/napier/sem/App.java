@@ -78,7 +78,7 @@ public class App
                 cnt.Name = rset.getString("cntName");
 
                 City cCity = new City();
-                cCity.Name = rset.getString("cName");
+                //cCity.Name = rset.getString("cName");
                 cCity.Population = rset.getLong("cPopulation");
 
 
@@ -87,7 +87,8 @@ public class App
 
                 //  System.out.println(cnt.Population+ " " + cnt.Continent);
                 //System.out.println(cnt.Population+ " " + cnt.Region);
-                System.out.println(cnt.Name + " " + cnt.Population  + " " + cnt.Continent + " " + cCity.Population + " " + cCity.Name);
+               // System.out.println(cnt.Name + " " + cnt.Population  + " " + cnt.Continent + " " + cCity.Population + " " + cCity.Name);
+                System.out.println(cnt.Continent + " " + cnt.Name + " " + (((cCity.Population) / (cnt.Population)) *100) + " " + (cnt.Population - cCity.Population));
                // System.out.println(cnt.Name + " " + cnt.Population + " " + cnt.Region);
                // System.out.println(cCity.cName + " " + cnt.Population + " " + cnt.Name);
 
