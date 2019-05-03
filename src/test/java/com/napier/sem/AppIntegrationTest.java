@@ -42,8 +42,8 @@ public class AppIntegrationTest
     @Test
     void getRegionCapitalCityTesting()
     {
-        ArrayList<City> counties = app.getAllCapitalContinent("Caribbean");
-        assertEquals(counties.get(0). Population, 9981619);
+        ArrayList<City> counties = app.getRegionCapital("Caribbean");
+        assertEquals(counties.get(0). Population, 307000);
     }
 
     // 23. Test for Brazil
