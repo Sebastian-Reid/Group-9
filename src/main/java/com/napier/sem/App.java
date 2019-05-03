@@ -88,7 +88,6 @@ public class App
         }
     }
 
-
     // 2. All the countries in a CONTINENT organised by largest population to smallest.
     public ArrayList<Country> getContinentPop() {
         try {
@@ -480,24 +479,30 @@ public class App
 
             //population of people in each CONTINENT
             String strSelect =
-                   " SELECT DISTINCT(country.Continent) AS Continent, SUM(country.Population) AS Population "
-                     + " FROM country"
-                     + " GROUP BY Continent";
+                    " SELECT DISTINCT(country.Continent) AS dContinent, SUM(DISTINCT country.Population) AS coPopulation, SUM(city.Population) AS cPopulation" +
+                            " FROM country JOIN city ON country.Code = city.CountryCode" +
+                            " WHERE country.Code = city.CountryCode" +
+                            " GROUP BY dContinent";
 
-                ResultSet rset = stmt.executeQuery(strSelect);
+            ResultSet rset = stmt.executeQuery(strSelect);
 
                 ArrayList<Country> continentRegionPop = new ArrayList<Country>();
+                System.out.println(" Continent | Population | City Population");
                 while (rset.next())
                 {
                     Country cnt = new Country();
                     cnt.Population = (int) rset.getLong("Population");
                     cnt.Name = rset.getString("Region");
 
-                    System.out.println(cnt.Population + " " + cnt.Continent);
+                    City cCity = new City();
+                    //cCity.Name = rset.getString("cName");
+                    cCity.Population = rset.getInt("cPopulation");
+
+                    System.out.println(cnt.Continent + " | " + cnt.Population + " | " + cCity.Population);
 
                     continentRegionPop.add(cnt);
                 }
-
+                System.out.println("\n");
                 return continentRegionPop;
             }
             catch (Exception e)

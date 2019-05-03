@@ -37,6 +37,7 @@ public class AppIntegrationTest
         ArrayList<Country> countries = app.getContinentPop();
         assertEquals(countries .get(0). Population, 1277558000);
     }
+
     // 3. Test for region
     @Test
     void getRegionPopTesting()
@@ -52,7 +53,7 @@ public class AppIntegrationTest
         assertEquals(cities .get(0). Population, 10500000);
     }
 
-    // 8. Test for Continent
+    // 8. Test for Continent (Mumbai)
     @Test
     void getCityPopConTesting()
     {
@@ -96,8 +97,9 @@ public class AppIntegrationTest
     void getCountryPopulationTesting()
     {
         ArrayList<Country> countries = app.getCountryPopulation();
-        assertEquals(countries.get(0).Population, 170115000 );
+        assertEquals(countries.get(0).Population, 370502570 );
     }
+
 
 
 }
