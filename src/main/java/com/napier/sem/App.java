@@ -331,7 +331,6 @@ public class App
     }
 
     // 17. All the capital cities in the WORLD organised by largest population to smallest.
-    //@RequestMapping("world")
     @RequestMapping("all_city_population")
     public ArrayList<City> getAllCapital() {
         try {
@@ -370,7 +369,8 @@ public class App
         }
     }
 
-    // 18. All the capital cities in a CONTINENT organised by largest population to smallest.
+    // 18. All the capital cities in a CONTINENT organised by largest population to smallest. (Continent = 'Asia')
+    @RequestMapping("continent_capital_city")
     public ArrayList<City> getAllCapitalContinent(String continent)
     {
         try
@@ -384,7 +384,7 @@ public class App
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
                             + "WHERE country.Capital = city.ID AND country.Continent = " + "'" + continent +"'"
-                            + " ORDER BY city.Population DESC";
+                            + " ORDER BY city.Population DESC LIMIT 3";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -413,7 +413,7 @@ public class App
         }
     }
 
-   // 19. All the capital cities in a REGION organised by largest to smallest.
+   // 19. All the capital cities in a REGION organised by largest to smallest. (Region = 'Caribbean')
     public ArrayList<City> getRegionCapital(String region)
     {
         try
@@ -427,7 +427,7 @@ public class App
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
                             + "WHERE country.Capital = city.ID AND country.Region = " + "'" + region +"'"
-                            + " ORDER BY city.Population DESC";
+                            + " ORDER BY city.Population DESC LIMIT 3";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
