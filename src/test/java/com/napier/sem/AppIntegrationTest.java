@@ -30,11 +30,19 @@ public class AppIntegrationTest
         assertEquals(countries.get(0). Population, 9981619);
     }
 
-    // 18. Test for
+    // 18. Test for  Seoul
     @Test
     void getContinentCapitalCityTesting()
     {
         ArrayList<City> counties = app.getAllCapitalContinent("Asia");
+        assertEquals(counties.get(0). Population, 9981619);
+    }
+
+    // 19. Test for Seoul
+    @Test
+    void getRegionCapitalCityTesting()
+    {
+        ArrayList<City> counties = app.getAllCapitalContinent("Caribbean");
         assertEquals(counties.get(0). Population, 9981619);
     }
 

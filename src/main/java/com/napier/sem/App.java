@@ -414,6 +414,7 @@ public class App
     }
 
    // 19. All the capital cities in a REGION organised by largest to smallest. (Region = 'Caribbean')
+    @RequestMapping("region_capital_city")
     public ArrayList<City> getRegionCapital(String region)
     {
         try
