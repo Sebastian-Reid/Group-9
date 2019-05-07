@@ -481,7 +481,9 @@ public class App
                     " SELECT DISTINCT(country.Continent) AS dContinent, SUM(DISTINCT country.Population) AS coPopulation, SUM(city.Population) AS cPopulation" +
                             " FROM country JOIN city ON country.Code = city.CountryCode" +
                             " WHERE country.Code = city.CountryCode" +
-                            " GROUP BY dContinent DESC";
+                            " GROUP BY dContinent " +
+                            " ORDER BY country.Population ";
+
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
