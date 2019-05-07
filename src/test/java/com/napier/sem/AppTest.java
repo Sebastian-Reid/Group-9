@@ -31,9 +31,7 @@ public class AppTest
     void getRegionPop() {
         app.getRegionPop();
     }
-    */
 
-    /*
    @Test
     void getNWorldPop() {
         app.getNWorldPop();
@@ -119,9 +117,10 @@ public class AppTest
     @Test
     void getContinentPopulation()
     {
-        app.getCountryPopulation();
+        app.getContinentPopulation();
     }
 
+    /*
     @Test
     void getCountryContinentPopTest()
     {
@@ -133,5 +132,5 @@ public class AppTest
     {
         app.getCountryRegionPopulation();
     }
-
+    */
 }
