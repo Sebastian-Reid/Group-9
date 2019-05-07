@@ -33,11 +33,17 @@ public class App
                         " GROUP BY Continent, cName, cntName ";*/ //population of people in cities in each continent
 
 
-                  String strSelect =
+                  /*String strSelect =
                           " SELECT DISTINCT(country.Region) AS cRegion, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
                           " FROM country JOIN city ON country.Code = city.CountryCode" +
                           " WHERE country.Code = city.CountryCode" +
-                          " GROUP BY cRegion"; //population of people in each continent
+                          " GROUP BY cRegion"; //population of people in each continent*/
+
+            String strSelect =
+                    " SELECT DISTINCT(country.Name) AS cName, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
+                            " FROM country JOIN city ON country.Code = city.CountryCode" +
+                            " WHERE country.Code = city.CountryCode" +
+                            " GROUP BY cName";
 
             /*
 
@@ -83,17 +89,17 @@ public class App
             while(rset.next())
             {
                 Country cnt = new Country();
-                //cnt.Name = rset.getString("dCountry");
+                cnt.Name = rset.getString("cName");
                 //cnt.Continent = rset.getString("dContinent");
                 cnt.Population = rset.getLong("coPopulation");
                  //  cnt.Name = rset.getString("cntName");
-                cnt.Region = rset.getString("cRegion");
+                //cnt.Region = rset.getString("cRegion");
                 City cCity = new City();
                 //cCity.Name = rset.getString("cName");
                 cCity.Population = rset.getLong("cPopulation");
 
 
-                System.out.println(cnt.Region + " " + cnt.Population + " " + ((cCity.Population * 100) / (cnt.Population))+"%" + " " + (100 - (cCity.Population * 100) / (cnt.Population)) + "%");
+                System.out.println(cnt.Name + " " + cnt.Population + " " + ((cCity.Population * 100) / (cnt.Population))+"%" + " " + (100 - (cCity.Population * 100) / (cnt.Population)) + "%");
 
 
                 //cnt.Region = rset.getString("Region");
