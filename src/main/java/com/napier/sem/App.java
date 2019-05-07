@@ -47,6 +47,7 @@ public class App
         a.getContinentPopulation(); // 23
         a.getCountryRegionPopulation(); //24
         a.getCountryPopulation(); //25
+        a.getWorldPopulation(); //27
 
         a.disconnect();
     }
@@ -580,6 +581,39 @@ public class App
 
                 System.out.println(cnt.Name + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
 
+                country.add(cnt);
+            }
+            return country;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("No country populations in array");
+
+            return null;
+        }
+    }
+
+    // 27. Population of each Continent
+    @RequestMapping("Population_of_world")
+    public ArrayList<Country> getWorldPopulation() {
+        try {
+            Statement stmt = con.createStatement();
+
+            //population of people in the world
+            String strSelect =
+                    " SELECT DISTINCT(country.Continent) AS dContinent, SUM(DISTINCT country.Population) AS coPopulation" +
+                            " FROM country " +
+                            "GROUP BY dContinent";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country> country = new ArrayList<Country>();
+
+            while (rset.next()) {
+                Country cnt = new Country();
+                cnt.Continent = rset.getString("dContinent");
+                cnt.Population = (int) rset.getLong("coPopulation");
+
+                System.out.println(cnt.Continent + " | " + cnt.Population);
                 country.add(cnt);
             }
             return country;
