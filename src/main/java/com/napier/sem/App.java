@@ -497,13 +497,13 @@ public class App
             while (rset.next())
             {
                 Country cnt = new Country();
-                cnt.Population = (int) rset.getLong("coPopulation");
+                cnt.Population = rset.getLong("coPopulation");
                 cnt.Continent = rset.getString("dContinent");
 
                 City cCity = new City();
-                cCity.Population = rset.getInt("cPopulation");
+                cCity.Population = rset.getLong("cPopulation");
 
-                System.out.println(cnt.Continent + " | " + cnt.Population + " | " + cCity.Population + " | " + ((cCity.Population * 100) / (cnt.Population))+ "%" + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population))+ "%");
+                System.out.println(cnt.Continent + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population*100)/(cnt.Population))) + "%" + " | " + (cnt.Population - cCity.Population) + " | " + (100 - ((cCity.Population * 100) / (cnt.Population)))+ "%");
 
                 country.add(cnt);
             }
@@ -542,10 +542,10 @@ public class App
                 {
                     Country cnt = new Country();
                     cnt.Region = rset.getString("dRegion");
-                    cnt.Population = rset.getInt("coPopulation");
+                    cnt.Population = rset.getLong("coPopulation");
 
                     City cCity = new City();
-                    cCity.Population = rset.getInt("cPopulation");
+                    cCity.Population = rset.getLong("cPopulation");
 
                     System.out.println(cnt.Region + " | " + cnt.Population + " | " + cCity.Population + " | " + ((cCity.Population * 100) / (cnt.Population)) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
                     country.add(cnt);
@@ -583,10 +583,10 @@ public class App
             {
                 Country cnt = new Country();
                 cnt.Name = rset.getString("dCountry");
-                cnt.Population = (int)rset.getLong("coPopulation");
+                cnt.Population = rset.getLong("coPopulation");
 
                 City cCity = new City();
-                cCity.Population = (int)rset.getLong("cPopulation");
+                cCity.Population = rset.getLong("cPopulation");
 
                 System.out.println(cnt.Name + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
 
@@ -601,7 +601,6 @@ public class App
             return null;
         }
     }
-
     // 26. Population of the world
 
     // 27. Population of each Continent

@@ -14,6 +14,9 @@ public class AppTest
         app = new App();
     }
 
+    /*
+        Unit tests test for null
+    */
     // 1. All the countries in the world organised by largest population to smallest
     @Test
     void getPopulationOrder() {
@@ -99,6 +102,7 @@ public class AppTest
         app.getRegionPopulation();
     }
 
+    //25.
     @Test
     void getCountryPopulation()
     {

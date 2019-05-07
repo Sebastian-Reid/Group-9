@@ -21,6 +21,9 @@ public class AppIntegrationTest
 
         app.connect("localhost:33060");
     }
+    /*
+         Testing for the first element in the array found in the SQL Statements
+    */
 
     // 1. Test for China
     @Test
@@ -88,7 +91,7 @@ public class AppIntegrationTest
         ArrayList<City> capCity = app.getAllCapital();
         assertEquals(capCity .get(0). Population, 9981619);
     }
-    // 18. Test for Asia (result: Seoul)
+    // 18. Test for Seoul
     @Test
     void getContinentCapitalCityTesting()
     {
@@ -96,7 +99,7 @@ public class AppIntegrationTest
         assertEquals(capCity .get(0). Population, 9981619);
     }
 
-    // 19. Test for Caribbean (Result: ... )
+    // 19. Test for Caribbean
     @Test
     void getRegionCapitalCityTesting()
     {
@@ -120,7 +123,7 @@ public class AppIntegrationTest
         assertEquals(country .get(0). Region, "Australia and New Zealand");
     }
 
-    // 25. Test for ...
+    // 25. The population of people, people living in cities, and people not living in cities in each COUNTRY.
     @Test
     void getCountryPopulationTesting() {
         ArrayList<Country> country = app.getCountryPopulation();
