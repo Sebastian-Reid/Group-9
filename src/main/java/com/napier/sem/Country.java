@@ -16,7 +16,7 @@ public class Country {
     public String Region;
     public float SurfaceArea;
     public int IndepYear;
-    public long Population;
+    public int Population;
     public float LifeExpectancy;
     public float GNP;
     public float GNPOld;
