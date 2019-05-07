@@ -97,9 +97,7 @@ public class AppIntegrationTest
     void getContinentPopulationTesting()
     {
         ArrayList<Country> countries = app.getContinentPopulation();
-        assertEquals(countries .get(0). Continent, "Oceania");
-
-        //assertEquals(countries.get(0). Continent, "Asia");
+        assertEquals(countries .get(0). Continent, "Asia");
     }
     /*
     // 24. Test for ...
