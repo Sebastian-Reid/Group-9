@@ -565,7 +565,7 @@ public class App
                     " SELECT DISTINCT(country.Name) AS dCountry, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
                             " FROM country JOIN city ON country.Code = city.CountryCode" +
                             " WHERE country.Code = city.CountryCode" +
-                            " GROUP BY dCountry DESC "; // population of people in each country
+                            " GROUP BY dCountry "; // population of people in each country
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -601,9 +601,10 @@ public class App
 
             //population of people in the world
             String strSelect =
-                    " SELECT DISTINCT(country.Continent) AS dContinent, SUM(DISTINCT country.Population) AS coPopulation" +
-                            " FROM country " +
-                            "GROUP BY dContinent";
+                    " SELECT DISTINCT(country.Name) AS dCountry, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
+                            " FROM country JOIN city ON country.Code = city.CountryCode" +
+                            " WHERE country.Code = city.CountryCode" +
+                            " GROUP BY dCountry";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -611,7 +612,7 @@ public class App
 
             while (rset.next()) {
                 Country cnt = new Country();
-                cnt.Continent = rset.getString("dContinent");
+                cnt.Name = rset.getString("dCountry");
                 cnt.Population = (int) rset.getLong("coPopulation");
 
                 System.out.println(cnt.Continent + " | " + cnt.Population);

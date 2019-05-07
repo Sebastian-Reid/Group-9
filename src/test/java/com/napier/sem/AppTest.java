@@ -120,17 +120,16 @@ public class AppTest
         app.getContinentPopulation();
     }
 
-    /*
     @Test
-    void getCountryContinentPopTest()
+    void getCountryRegionPopulation()
     {
-        app.getContinentPopulation();
+        app.getCountryRegionPopulation();
     }
 
     @Test
     void getCountryRegionPopTest()
     {
-        app.getCountryRegionPopulation();
+        app.getCountryPopulation();
     }
-    */
+
 }
