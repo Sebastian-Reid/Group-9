@@ -573,10 +573,10 @@ public class App
             {
                 Country cnt = new Country();
                 cnt.Name = rset.getString("dCountry");
-                cnt.Population = rset.getInt("coPopulation");
+                cnt.Population = (int)rset.getLong("coPopulation");
 
                 City cCity = new City();
-                cCity.Population = rset.getInt("cPopulation");
+                cCity.Population = (int)rset.getLong("cPopulation");
 
                 System.out.println(cnt.Name + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
 
