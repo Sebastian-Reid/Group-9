@@ -472,7 +472,6 @@ public class App
     // 23. The population of people, people living in cities, and people not living in cities in each CONTINENT.
     public ArrayList<Country> getContinentPopulation()
     {
-        // i. Population of people in each CONTINENT
         try
         {
             Statement stmt = con.createStatement();
@@ -495,7 +494,6 @@ public class App
                     cnt.Name = rset.getString("Region");
 
                     City cCity = new City();
-                    //cCity.Name = rset.getString("cName");
                     cCity.Population = rset.getInt("cPopulation");
 
                     System.out.println(cnt.Continent + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
@@ -522,27 +520,27 @@ public class App
             Statement stmt = con.createStatement();
 
             String strSelect =
-                    " SELECT  DISTINCT(country.Region) AS Region, SUM(country.Population) AS Population "
-                            + " FROM country" +
-                            " GROUP BY Region";
+                    " SELECT DISTINCT(country.Region) AS dRegion, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
+                            " FROM country JOIN city ON country.Code = city.CountryCode" +
+                            " WHERE country.Code = city.CountryCode" +
+                            " GROUP BY dRegion DESC"; //population of people in each region
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
-            ArrayList<Country> countryRegionPop = new ArrayList<Country>();
-            while (rset.next())
-            {
-                Country cnt = new Country();
+            ArrayList<Country> country= new ArrayList<Country>();
+            System.out.println(" Region | Region Pop | City Pop | City Pop % | Not a City Pop | Not a City Pop %");
+                while(rset.next())
+                {
+                    Country cnt = new Country();
+                    cnt.Region = rset.getString("dRegion");
+                    cnt.Population = rset.getInt("coPopulation");
 
-                cnt.Population = (int) rset.getLong("Population");
-                cnt.Region = rset.getString("Region");
+                    City cCity = new City();
+                    cCity.Population = rset.getInt("cPopulation");
 
-                System.out.println(cnt.Population+ " " + cnt.Region);
-
-                countryRegionPop.add(cnt);
-            }
-
-            return countryRegionPop;
-
+                    System.out.println(cnt.Region + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
+                }
+            return country;
         }
         catch (Exception e)
         {
@@ -561,11 +559,10 @@ public class App
 
             //population of people in each COUNTRY
             String strSelect =
-                    " SELECT DISTINCT(country.Continent) AS Continent, country.Name AS cntName, SUM(country.Population) AS Population, SUM(city.Population) AS cPopulation, city.Name AS cName" +
-                            " FROM city JOIN country ON country.Code = city.CountryCode " +
-                            " WHERE country.Code = city.CountryCode"+
-                            " GROUP BY Continent, cName, country.Name " +//population of people in cities in each continent
-                            " ORDER BY Continent DESC LIMIT 3";
+                    " SELECT DISTINCT(country.Name) AS dCountry, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
+                            " FROM country JOIN city ON country.Code = city.CountryCode" +
+                            " WHERE country.Code = city.CountryCode" +
+                            " GROUP BY dCountry DESC "; // population of people in each continent
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
@@ -574,15 +571,13 @@ public class App
             while(rset.next())
             {
                 Country cnt = new Country();
-                cnt.Continent = rset.getString("Continent");
-                cnt.Population = rset.getInt("Population");
-                cnt.Name = rset.getString("cntName");
+                cnt.Name = rset.getString("dCountry");
+                cnt.Population = rset.getInt("coPopulation");
 
                 City cCity = new City();
-                cCity.Name = rset.getString("cName");
                 cCity.Population = rset.getInt("cPopulation");
 
-                System.out.println(cnt.Name + " " + cnt.Population  + " " + cnt.Continent + " " + cCity.Population + " " + cCity.Name);
+                System.out.println(cnt.Name + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
 
                 country.add(cnt);
             }

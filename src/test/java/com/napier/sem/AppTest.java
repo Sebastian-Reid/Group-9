@@ -121,7 +121,7 @@ public class AppTest
     {
         app.getCountryPopulation();
     }
-    /*
+
     @Test
     void getCountryContinentPopTest()
     {
@@ -133,5 +133,5 @@ public class AppTest
     {
         app.getCountryRegionPopulation();
     }
-    */
+
 }
