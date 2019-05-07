@@ -494,7 +494,7 @@ public class App
             {
                 Country cnt = new Country();
                 cnt.Population = (int) rset.getLong("coPopulation");
-                cnt.Name = rset.getString("Region");
+                cnt.Continent = rset.getString("dContinent");
 
                 City cCity = new City();
                 //cCity.Name = rset.getString("cName");
