@@ -472,6 +472,7 @@ public class App
     // 23. The population of people, people living in cities, and people not living in cities in each CONTINENT.
     public ArrayList<Country> getContinentPopulation()
     {
+        // i. Population of people in each CONTINENT
         try
         {
             Statement stmt = con.createStatement();
@@ -481,36 +482,37 @@ public class App
                     " SELECT DISTINCT(country.Continent) AS dContinent, SUM(DISTINCT country.Population) AS coPopulation, SUM(city.Population) AS cPopulation" +
                             " FROM country JOIN city ON country.Code = city.CountryCode" +
                             " WHERE country.Code = city.CountryCode" +
-                            " GROUP BY dContinent";
+                            " GROUP BY dContinent DESC";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
-                ArrayList<Country> country= new ArrayList<Country>();
-                System.out.println(" Continent | Continent Pop | City Pop | City Pop % | Not a City Pop | Not a City Pop %");
-                while (rset.next())
-                {
-                    Country cnt = new Country();
-                    cnt.Continent = rset.getString("dContinent");
-                    cnt.Population = rset.getInt("coPopulation");
-
-                    City cCity = new City();
-                    cCity.Population = rset.getInt("cPopulation");
-
-                    System.out.println(cnt.Continent + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
-
-                    country.add(cnt);
-                }
-                System.out.println("\n");
-                return country;
-            }
-            catch (Exception e)
+            ArrayList<Country> country= new ArrayList<Country>();
+            System.out.println(" Continent | Continent Pop | City Pop | City Pop % | Not a City Pop | Not a City Pop %");
+            while (rset.next())
             {
-                System.out.println(e.getMessage());
-                System.out.println("No continent populations in the array");
+                Country cnt = new Country();
+                cnt.Population = (int) rset.getLong("Population");
+                cnt.Name = rset.getString("Region");
 
-                return null;
+                City cCity = new City();
+                //cCity.Name = rset.getString("cName");
+                cCity.Population = rset.getInt("cPopulation");
+
+                System.out.println(cnt.Continent + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
+
+                country.add(cnt);
             }
+            System.out.println("\n");
+            return country;
         }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("No continent populations in the array");
+
+            return null;
+        }
+    }
 
     // 24. The population of people, people living in cities, and people not living in cities in each REGION.
     public ArrayList<Country> getCountryRegionPopulation()

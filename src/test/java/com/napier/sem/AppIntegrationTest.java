@@ -95,13 +95,11 @@ public class AppIntegrationTest
 
     // 23. Test for Asia
     @Test
-    void getContinentPopulationTesting()
+    void getCountryPopulationTesting()
     {
-        ArrayList<Country> countries = app.getContinentPopulation();
-        assertEquals(countries.get(0).Continent, "Asia" );
+        ArrayList<Country> countries = app.getCountryPopulation();
+        assertEquals(countries.get(0).Continent, "Asia");
     }
-
-
     /*
     // 24. Test for ...
     @Test
