@@ -120,6 +120,7 @@ public class AppTest
         app.getContinentPopulation();
     }
 
+    // 24. The population of people, people living in cities, and people not living in cities in each region
     @Test
     void getCountryRegionPopulation()
     {

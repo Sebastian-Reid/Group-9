@@ -47,7 +47,8 @@ public class App
         a.getContinentPopulation(); // 23
         a.getCountryRegionPopulation(); //24
         a.getCountryPopulation(); //25
-        a.getWorldPopulation(); //27
+        //a.getWorldPopulation(); //26
+        a.getAllContinentPopulation(); // 27
 
         a.disconnect();
     }
@@ -355,6 +356,7 @@ public class App
             // Return new capital city if valid.
             // Check one is returned
             ArrayList<City> capCity = new ArrayList<City>();
+            System.out.println("17. All the capital cities in the WORLD organised by largest population to smallest.");
             System.out.println("Capital City | Population | Country");
             while (rset.next())
             {
@@ -399,6 +401,7 @@ public class App
             // Return new capital city if valid.
             // Check one is returned
             ArrayList<City> capCity = new ArrayList<City>();
+            System.out.println("18. All the capital cities in a CONTINENT organised by largest population to smallest.");
             System.out.println("Capital City | Population | Country");
             while (rset.next())
             {
@@ -445,6 +448,7 @@ public class App
             // Return new capital city if valid.
             // Check one is returned
             ArrayList<City> capCity = new ArrayList<City>();
+            System.out.println("19. All the capital cities in a REGION organised by largest to smallest.");
             System.out.println("Capital City | Population | Country");
             while (rset.next())
             {
@@ -489,6 +493,7 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             ArrayList<Country> country= new ArrayList<Country>();
+            System.out.println("23. The population of people, people living in cities, and people not living in cities in each CONTINENT.");
             System.out.println(" Continent | Continent Pop | City Pop | City Pop % | Not a City Pop | Not a City Pop %");
             while (rset.next())
             {
@@ -497,7 +502,6 @@ public class App
                 cnt.Continent = rset.getString("dContinent");
 
                 City cCity = new City();
-                //cCity.Name = rset.getString("cName");
                 cCity.Population = rset.getInt("cPopulation");
 
                 System.out.println(cnt.Continent + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
@@ -527,11 +531,12 @@ public class App
                     " SELECT DISTINCT(country.Region) AS dRegion, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
                             " FROM country JOIN city ON country.Code = city.CountryCode" +
                             " WHERE country.Code = city.CountryCode" +
-                            " GROUP BY dRegion DESC"; //population of people in each region
+                            " GROUP BY dRegion "; //population of people in each region
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
             ArrayList<Country> country= new ArrayList<Country>();
+            System.out.println("24. The population of people, people living in cities, and people not living in cities in each REGION.");
             System.out.println(" Region | Region Pop | City Pop | City Pop % | Not a City Pop | Not a City Pop %");
                 while(rset.next())
                 {
@@ -570,7 +575,8 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             ArrayList<Country> country = new ArrayList<Country>();
-
+            System.out.println("25. The population of people, people living in cities, and people not living in cities in each COUNTRY.");
+            System.out.println(" Country | Country Pop | City Pop | City Pop % | Not a City Pop | Not a City Pop %");
             while(rset.next())
             {
                 Country cnt = new Country();
@@ -593,9 +599,11 @@ public class App
         }
     }
 
+    // 26. Population of the world
+
     // 27. Population of each Continent
-    @RequestMapping("Population_of_world")
-    public ArrayList<Country> getWorldPopulation() {
+    @RequestMapping("Population_of_all_continent")
+    public ArrayList<Country> getAllContinentPopulation() {
         try {
             Statement stmt = con.createStatement();
 
