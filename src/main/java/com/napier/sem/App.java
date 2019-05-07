@@ -37,13 +37,18 @@ public class App
                           " SELECT DISTINCT(country.Region) AS cRegion, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
                           " FROM country JOIN city ON country.Code = city.CountryCode" +
                           " WHERE country.Code = city.CountryCode" +
-                          " GROUP BY cRegion"; //population of people in each continent*/
+                          " GROUP BY cRegion"; //population of people in each continent*/ //SQL 28 (REGION REPORT)
 
-            String strSelect =
+            /*String strSelect =
                     " SELECT DISTINCT(country.Name) AS cName, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
                             " FROM country JOIN city ON country.Code = city.CountryCode" +
                             " WHERE country.Code = city.CountryCode" +
-                            " GROUP BY cName";
+                            " GROUP BY cName";*/ //SQL 29 (COUNTRY REPORT)
+            String strSelect =
+                    " SELECT DISTINCT(city.District) AS cDis, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
+                            " FROM country JOIN city ON country.Code = city.CountryCode" +
+                            " WHERE country.Code = city.CountryCode" +
+                            " GROUP BY cDis";  //SQL 30 (DISTRICT REPORT)
 
             /*
 
@@ -89,12 +94,13 @@ public class App
             while(rset.next())
             {
                 Country cnt = new Country();
-                cnt.Name = rset.getString("cName");
+                //cnt.Name = rset.getString("cName");
                 //cnt.Continent = rset.getString("dContinent");
                 cnt.Population = rset.getLong("coPopulation");
                  //  cnt.Name = rset.getString("cntName");
                 //cnt.Region = rset.getString("cRegion");
                 City cCity = new City();
+                cCity.District = rset.getString("cDis");
                 //cCity.Name = rset.getString("cName");
                 cCity.Population = rset.getLong("cPopulation");
 
