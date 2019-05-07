@@ -70,6 +70,7 @@ public class App
             // Return new capital city if valid.
             // Check one is returned
             ArrayList<Country> PopOrder = new ArrayList<>();
+            System.out.println("1. All the countries in the WORLD organised by largest population to smallest");
             System.out.println("Country | Population");
             while (rset.next()) {
                 // Create new Country (to store in database)
@@ -475,9 +476,9 @@ public class App
 
     }
     // 23. The population of people, people living in cities, and people not living in cities in each CONTINENT.
+    @RequestMapping("continent_population")
     public ArrayList<Country> getContinentPopulation()
     {
-        // i. Population of people in each CONTINENT
         try
         {
             Statement stmt = con.createStatement();
@@ -521,6 +522,7 @@ public class App
     }
 
     // 24. The population of people, people living in cities, and people not living in cities in each REGION.
+    @RequestMapping("region_population")
     public ArrayList<Country> getCountryRegionPopulation()
     {
         try
@@ -536,7 +538,7 @@ public class App
             ResultSet rset = stmt.executeQuery(strSelect);
 
             ArrayList<Country> country= new ArrayList<Country>();
-            System.out.println("24. The population of people, people living in cities, and people not living in cities in each REGION.");
+            System.out.println(" 24. The population of people, people living in cities, and people not living in cities in each REGION.");
             System.out.println(" Region | Region Pop | City Pop | City Pop % | Not a City Pop | Not a City Pop %");
                 while(rset.next())
                 {
@@ -549,6 +551,7 @@ public class App
 
                     System.out.println(cnt.Region + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
                 }
+            System.out.println("\n");
             return country;
         }
         catch (Exception e)
