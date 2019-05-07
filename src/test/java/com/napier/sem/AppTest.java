@@ -19,7 +19,7 @@ public class AppTest
     void getPopulationOrder() {
         app.getPopulationOrder();
     }
-    /*
+
     // 2. All the countries in the continent organised by largest population to smallest
     @Test
     void getContinentPop() {
@@ -31,20 +31,6 @@ public class AppTest
     void getRegionPop() {
         app.getRegionPop();
     }
-
-   @Test
-    void getNWorldPop() {
-        app.getNWorldPop();
-    }
-    @Test
-    void getNContinentPop() {
-        app.getNContinentPop();
-    }
-    @Test
-    void getNRegionPop() {
-        app.getNRegionPop();
-    }
-    */
 
     // 7. All the cities in the world organised by largest population to smallest
     @Test
@@ -77,27 +63,13 @@ public class AppTest
     {
         app.getDiscPop();
     }
-    /*
-    @Test
-    void getNPopCity() {
-        app.getNPopCity();
-    }
-    @Test
-    void getNPopCityCon() {
-        app.getNPopCityCon;
-    }
-    @Test
-    void getNPopCityReg() {
-        app.getNPopCityReg();
-    }
-    */
+
     // 17. All the capital cities in the world organised by largest population to smallest
     @Test
     void getAllCapital()
     {
         app.getAllCapital();
     }
-
 
     // 18. All the capital cities in a continent organised by largest population to smallest
     @Test
@@ -122,13 +94,13 @@ public class AppTest
 
     // 24. The population of people, people living in cities, and people not living in cities in each region
     @Test
-    void getCountryRegionPopulation()
+    void getRegionPopulation()
     {
-        app.getCountryRegionPopulation();
+        app.getRegionPopulation();
     }
 
     @Test
-    void getCountryRegionPopTest()
+    void getCountryPopulation()
     {
         app.getCountryPopulation();
     }

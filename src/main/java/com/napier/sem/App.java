@@ -45,7 +45,7 @@ public class App
         a.getAllCapitalContinent("Asia"); //18
         a.getRegionCapital("Caribbean"); //19
         a.getContinentPopulation(); // 23
-        a.getCountryRegionPopulation(); //24
+        a.getRegionPopulation(); //24
         a.getCountryPopulation(); //25
         //a.getWorldPopulation(); //26
         a.getAllContinentPopulation(); // 27
@@ -60,11 +60,11 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            // ALl the capital cities in the WORLD organised by largest population to smallest
+            // ALl cities in the WORLD organised by largest population to smallest
             String strSelect =
                     "SELECT country.Name, country.Population"
                             + " FROM country"
-                            + " ORDER BY Population DESC LIMIT 3";
+                            + " ORDER BY Population DESC LIMIT 10";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -86,7 +86,7 @@ public class App
         } catch (Exception e) {
             // Capital City not found.
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
+            System.out.println("1. Failed to get city details");
             return null;
         }
     }
@@ -99,25 +99,27 @@ public class App
             // Create string for SQL statement
             // ALl the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
-                    "SELECT country.Continent, country.Name, SUM(country.Population)"
+                    "SELECT SUM(country.Population) AS Population, country.Continent, country.Name"
                             + " FROM country"
-                            + " GROUP BY country.Continent, country.Name"
-                            + " ORDER BY country.Continent, SUM(country.Population) DESC LIMIT 3";
+                            + " GROUP BY Continent, Name"
+                            + " ORDER BY country.Continent, SUM(country.Population) DESC LIMIT 10";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
             // Check one is returned
-            ArrayList<Country> ContPop = new ArrayList<>();
+            ArrayList<Country> Country = new ArrayList<>();
             while (rset.next()) {
                 // Create new Country (to store in database)
                 Country cnt = new Country();
+
                 cnt.Name = rset.getString("Name");
                 cnt.Population = rset.getInt("Population");
                 cnt.Continent = rset.getString("Continent");
+
                 System.out.println(cnt.Continent + " " + cnt.Name + " " + cnt.Population);
-                ContPop.add(cnt);
+                Country.add(cnt);
             }
-            return ContPop;
+            return Country;
         } catch (Exception e) {
             // Capital City not found.
             System.out.println(e.getMessage());
@@ -134,25 +136,25 @@ public class App
             // Create string for SQL statement
             // ALl the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
-                    "SELECT country.Region, country.Name, SUM(country.Population)"
-                            + " FROM country"
-                            + " GROUP BY country.Region, country.Name"
-                            + " ORDER BY country.Region, SUM(country.Population) DESC";
+                    "SELECT SUM(country.Population) AS Population, country.Region, country.Name"
+                            +" FROM country"
+                            +" GROUP BY country.Region, country.Name"
+                            +" ORDER BY country.Region, SUM(country.Population) DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
             // Check one is returned
-            ArrayList<Country> RegPop = new ArrayList<>();
+            ArrayList<Country> Country = new ArrayList<>();
             while (rset.next()) {
                 // Create new Country (to store in database)
                 Country cnt = new Country();
-                cnt.Name = rset.getString("CountryName");
-                cnt.Region = rset.getString("CountryRegion");
-                cnt.Population = rset.getInt("CountryPopulation");
+                cnt.Name = rset.getString("Name");
+                cnt.Region = rset.getString("Region");
+                cnt.Population = rset.getInt("Population");
                 System.out.println(cnt.Region + " " + cnt.Name + " " + cnt.Population);
-                RegPop.add(cnt);
+                Country.add(cnt);
             }
-            return RegPop;
+            return Country;
         } catch (Exception e) {
             // Capital City not found.
             System.out.println(e.getMessage());
@@ -168,11 +170,10 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            // ALl the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
                     "SELECT city.Name, city.Population"
                             +" FROM city"
-                            +" ORDER BY city.Population DESC LIMIT 3";
+                            +" ORDER BY city.Population DESC LIMIT 10";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -181,8 +182,8 @@ public class App
             while (rset.next()) {
                 // Create new city (to store in database)
                 City cty = new City();
-                cty.Name = rset.getString("cityName");
-                cty.Population = rset.getInt("CityPopulation");
+                cty.Name = rset.getString("Name");
+                cty.Population = rset.getInt("Population");
                 System.out.println(cty.Name + " " + cty.Population);
                 CtyPop.add(cty);
             }
@@ -190,7 +191,7 @@ public class App
         } catch (Exception e) {
             // Capital City not found.
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
+            System.out.println("7. Failed to get city details");
             return null;
         }
     }
@@ -201,11 +202,10 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            //All the cities in a continent organised by largest population to smallest
             String strSelect =
                     "SELECT country.Continent, city.Name, city.Population"
                             +" FROM city"
-                            +" INNER JOIN country ON city.CountryCode=Country.Code"
+                            +" INNER JOIN country ON city.CountryCode = country.Code"
                             +" ORDER BY country.Continent, city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -215,11 +215,11 @@ public class App
             while (rset.next()) {
                 // Create new Country/City (to store in database)
                 City cty = new City();
-                cty.Name = rset.getString("CityName");
-                cty.Population = rset.getInt("CityPopulation");
+                cty.Name = rset.getString("Name");
+                cty.Population = rset.getInt("Population");
 
                 Country cnt = new Country();
-                cnt.Continent = rset.getString("CountryContinent");
+                cnt.Continent = rset.getString("Continent");
                 System.out.println(cnt.Continent + " " + cty.Name + " " + cty.Population);
                 CityPopCon.add(cty);
             }
@@ -238,11 +238,10 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            //All the cities in a region organised by largest population to smallest
             String strSelect =
                     "SELECT country.Region, city.Name, city.Population"
                             +" FROM city"
-                            +" INNER JOIN country ON city.CountryCode=Country.Code"
+                            +" INNER JOIN country ON city.CountryCode = country.Code"
                             +" ORDER BY country.Region, city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -252,11 +251,11 @@ public class App
             while (rset.next()) {
                 // Create new Country/City (to store in database)
                 City cty = new City();
-                cty.Name = rset.getString("CityName");
-                cty.Population = rset.getInt("CityPopulation");
+                cty.Name = rset.getString("Name");
+                cty.Population = rset.getInt("Population");
 
                 Country cnt = new Country();
-                cnt.Region = rset.getString("CountryRegion");
+                cnt.Region = rset.getString("Region");
                 System.out.println(cnt.Region + " " + cty.Name + " " + cty.Population);
                 PopCityReg.add(cty);
             }
@@ -276,9 +275,9 @@ public class App
             // Create string for SQL statement
             //All the cities in a country organised by largest population to smallest
             String strSelect =
-                    "SELECT country.Name, city.Name, city.Population"
+                    "SELECT country.Name, city.Name AS cCity, city.Population"
                             +" FROM city"
-                            +" INNER JOIN country ON city.CountryCode=Country.Code"
+                            +" INNER JOIN country ON city.CountryCode = country.Code"
                             +" ORDER BY country.Continent, city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -288,10 +287,10 @@ public class App
             while (rset.next()) {
                 // Create new Country/City (to store in database)
                 City cty = new City();
-                cty.Name = rset.getString("CityName");
-                cty.Population = rset.getInt("CityPopulation");
+                cty.Name = rset.getString("cCity");
+                cty.Population = rset.getInt("Population");
                 Country cnt = new Country();
-                cnt.Name = rset.getString("CountryName");
+                cnt.Name = rset.getString("Name");
                 System.out.println(cnt.Name + " " + cty.Name + " " + cty.Population);
                 PopCityCount.add(cty);
             }
@@ -310,11 +309,10 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            // ALl the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
                     "SELECT city.District, city.Name, city.Population"
                             +" FROM city"
-                            +" ORDER BY city.District, city.Population DESC";
+                            +" ORDER BY city.District, city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -323,9 +321,9 @@ public class App
             while (rset.next()) {
                 // Create new city (to store in database)
                 City cty = new City();
-                cty.Name = rset.getString("cityName");
-                cty.Population = rset.getInt("CityPopulation");
-                cty.District = rset.getString("CityDistrict");
+                cty.Name = rset.getString("Name");
+                cty.Population = rset.getInt("Population");
+                cty.District = rset.getString("District");
                 System.out.println(cty.District + " " + cty.Name + " " + cty.Population);
                 DiscPop.add(cty);
             }
@@ -333,7 +331,7 @@ public class App
         } catch (Exception e) {
             // Capital City not found.
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
+            System.out.println("11. Failed to get city details");
             return null;
         }
     }
@@ -351,7 +349,7 @@ public class App
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
                             + "WHERE country.Capital = city.ID "
-                            + "ORDER BY city.population DESC LIMIT 3";
+                            + "ORDER BY city.population DESC LIMIT 10";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -375,7 +373,7 @@ public class App
         } catch (Exception e) {
             // Capital City not found.
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
+            System.out.println("17. Failed to get capital city details");
             return null;
         }
 
@@ -396,7 +394,7 @@ public class App
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
                             + "WHERE country.Capital = city.ID AND country.Continent = " + "'" + continent +"'"
-                            + " ORDER BY city.Population DESC LIMIT 3";
+                            + " ORDER BY city.Population DESC LIMIT 10";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -423,7 +421,7 @@ public class App
         {
             // Capital City not found.
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details by continent");
+            System.out.println("18. Failed to get capital city details by continent");
             return null;
         }
     }
@@ -443,7 +441,7 @@ public class App
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
                             + "WHERE country.Capital = city.ID AND country.Region = " + "'" + region +"'"
-                            + " ORDER BY city.Population DESC LIMIT 3";
+                            + " ORDER BY city.Population DESC LIMIT 10";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -470,7 +468,7 @@ public class App
         {
             // Capital City not found.
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details by region");
+            System.out.println("19. Failed to get capital city details by region");
             return null;
         }
 
@@ -505,7 +503,7 @@ public class App
                 City cCity = new City();
                 cCity.Population = rset.getInt("cPopulation");
 
-                System.out.println(cnt.Continent + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
+                System.out.println(cnt.Continent + " | " + cnt.Population + " | " + cCity.Population + " | " + ((cCity.Population * 100) / (cnt.Population))+ "%" + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population))+ "%");
 
                 country.add(cnt);
             }
@@ -515,7 +513,7 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("No continent populations in the array");
+            System.out.println("23. Failed to get continent populations");
 
             return null;
         }
@@ -523,7 +521,7 @@ public class App
 
     // 24. The population of people, people living in cities, and people not living in cities in each REGION.
     @RequestMapping("region_population")
-    public ArrayList<Country> getCountryRegionPopulation()
+    public ArrayList<Country> getRegionPopulation()
     {
         try
         {
@@ -549,7 +547,8 @@ public class App
                     City cCity = new City();
                     cCity.Population = rset.getInt("cPopulation");
 
-                    System.out.println(cnt.Region + " | " + cnt.Population + " | " + cCity.Population + " | " + (((cCity.Population * 100) / (cnt.Population))) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
+                    System.out.println(cnt.Region + " | " + cnt.Population + " | " + cCity.Population + " | " + ((cCity.Population * 100) / (cnt.Population)) + " | " + (cnt.Population - cCity.Population) + " | " + (100 - (cCity.Population * 100) / (cnt.Population)));
+                    country.add(cnt);
                 }
             System.out.println("\n");
             return country;
@@ -557,7 +556,7 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("No region populations in array");
+            System.out.println("24. Failed to get region populations");
             return null;
         }
     }
@@ -593,10 +592,11 @@ public class App
 
                 country.add(cnt);
             }
+            System.out.println("\n");
             return country;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("No country populations in array");
+            System.out.println("25. Failed to get country populations");
 
             return null;
         }
@@ -632,7 +632,7 @@ public class App
             return country;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("No country populations in array");
+            System.out.println("27. Failed to get population of each continent");
 
             return null;
         }

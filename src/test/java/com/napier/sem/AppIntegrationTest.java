@@ -29,7 +29,7 @@ public class AppIntegrationTest
         ArrayList<Country> countries = app.getPopulationOrder();
         assertEquals(countries .get(0). Population, 1277558000);
     }
-    /*
+
     //2. Test for Continent (Asia - China)
     @Test
     void getContinentPopTesting()
@@ -43,7 +43,7 @@ public class AppIntegrationTest
     void getRegionPopTesting()
     {
         ArrayList<Country> countries = app.getRegionPop();
-        assertEquals(countries.get(0). Population, actual 1277558000);
+        assertEquals(countries.get(0). Population, 0);
     }
     // 7. Test for World (Mumbai)
     @Test
@@ -60,15 +60,27 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.getCityPopCon();
         assertEquals(cities .get(0). Population, 10500000);
     }
-    // 9. Test for Region
+    // 9. Test for Australia and New Zealand
     @Test
     void getPopCityRegTesting()
     {
         ArrayList<City> cities = app.getPopCityReg();
+        assertEquals(cities .get(0). Population, 3276207);
+    }
+    // 10. Test for India Mumbai (Bombay)
+    @Test
+    void getPopCityCountTesting()
+    {
+        ArrayList<City> cities = app.getPopCityCount();
         assertEquals(cities .get(0). Population, 10500000);
     }
-    // 10.
-    */
+    // 11. Test for Taiping
+    @Test
+    void getDiscPopTesting()
+    {
+        ArrayList<City> cities = app.getDiscPop();
+        assertEquals(cities .get(0). Population, 165524);
+    }
     // 17. Test for Seoul
     @Test
     void getAllCapitalCityTesting()
@@ -97,23 +109,21 @@ public class AppIntegrationTest
     void getContinentPopulationTesting()
     {
         ArrayList<Country> countries = app.getContinentPopulation();
-        assertEquals(countries .get(0). Continent, "China");
+        assertEquals(countries .get(0). Continent, "Asia");
     }
 
-    // 24. Test for ...
+    // 24. Test for Australia and New Zealand
     @Test
     void getCountryRegionPopulationTesting()
     {
-        ArrayList<Country> country = app.getCountryRegionPopulation();
+        ArrayList<Country> country = app.getRegionPopulation();
         assertEquals(country .get(0). Region, "Australia and New Zealand");
     }
-    /*
+
     // 25. Test for ...
     @Test
-    void getCountryPopulationTesting()
-    {
+    void getCountryPopulationTesting() {
         ArrayList<Country> country = app.getCountryPopulation();
-        assertEquals(country.get(0).Name, "Asia" );
+        assertEquals(country.get(0).Name, "Afghanistan");
     }
-    */
 }
