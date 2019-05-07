@@ -493,7 +493,7 @@ public class App
             while (rset.next())
             {
                 Country cnt = new Country();
-                cnt.Population = (int) rset.getLong("Population");
+                cnt.Population = (int) rset.getLong("coPopulation");
                 cnt.Name = rset.getString("Region");
 
                 City cCity = new City();
