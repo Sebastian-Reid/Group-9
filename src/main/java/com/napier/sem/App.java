@@ -44,9 +44,9 @@ public class App
         a.getAllCapital(); //17
         a.getAllCapitalContinent("Asia"); //18
         a.getRegionCapital("Caribbean"); //19
-        a.getCountryPopulation(); // 23
+        a.getContinentPopulation(); // 23
         a.getCountryRegionPopulation(); //24
-        a.getContinentPopulation(); //25
+        a.getCountryPopulation(); //25
 
         a.disconnect();
     }
@@ -553,7 +553,6 @@ public class App
     // 25. The population of people, people living in cities, and people not living in cities in each COUNTRY.
     @RequestMapping("country_population")
     public ArrayList<Country> getCountryPopulation() {
-        // i. Population of people in each COUNTRY
         try {
             Statement stmt = con.createStatement();
 
@@ -562,7 +561,7 @@ public class App
                     " SELECT DISTINCT(country.Name) AS dCountry, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
                             " FROM country JOIN city ON country.Code = city.CountryCode" +
                             " WHERE country.Code = city.CountryCode" +
-                            " GROUP BY dCountry DESC "; // population of people in each continent
+                            " GROUP BY dCountry DESC "; // population of people in each country
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
