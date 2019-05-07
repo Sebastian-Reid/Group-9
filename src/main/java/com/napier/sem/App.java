@@ -482,7 +482,7 @@ public class App
                             " FROM country JOIN city ON country.Code = city.CountryCode" +
                             " WHERE country.Code = city.CountryCode" +
                             " GROUP BY dContinent " +
-                            " ORDER BY coPopulation ";
+                            " ORDER BY coPopulation DESC ";
 
 
             ResultSet rset = stmt.executeQuery(strSelect);
