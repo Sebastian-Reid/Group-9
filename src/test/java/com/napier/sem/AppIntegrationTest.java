@@ -105,7 +105,7 @@ public class AppIntegrationTest
     void getCountryRegionPopulationTesting()
     {
         ArrayList<Country> country = app.getCountryRegionPopulation();
-        assertEquals(country.get(0).Region, "Asia" );
+        assertEquals(country .get(0). Region, "Asia");
     }
     /*
     // 25. Test for ...
