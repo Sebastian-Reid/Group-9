@@ -100,6 +100,7 @@ public class AppIntegrationTest
         assertEquals(countries.get(0).Continent, "Asia" );
     }
 
+    /*
     // 24. Test for ...
     @Test
     void getCountryRegionPopulationTesting()
@@ -114,6 +115,6 @@ public class AppIntegrationTest
         ArrayList<Country> country = app.getCountryPopulation();
         assertEquals(country.get(0).Name, "Asia" );
     }
-
+    */
 
 }
