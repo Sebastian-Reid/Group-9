@@ -10,7 +10,7 @@ The design and implementation of a new system to allow easy access to population
 
 # Badges
 
-| Badges | |
+| Badges | Status |
 | --- | --- |
 | Master Build Status | [![Build Status](https://travis-ci.org/Sebastian-Reid/Group-9.svg?branch=master)](https://travis-ci.org/Sebastian-Reid/Group-9) |
 |Develop Build Status | [![Build Status](https://travis-ci.org/Sebastian-Reid/Group-9.svg?branch=develop)](https://travis-ci.org/Sebastian-Reid/Group-9) |
@@ -19,6 +19,8 @@ The design and implementation of a new system to allow easy access to population
 | Codecov | [![codecov](https://codecov.io/gh/Sebastian-Reid/Group-9/branch/master/graph/badge.svg)](https://codecov.io/gh/Sebastian-Reid/Group-9) |
 
 # Requirements
+
+20 requirements of 32 have been implemented, which is 62.5%.
 
 | ID | Description | Met | Screenshot |
 | --- | --- | --- | --- |
@@ -47,11 +49,11 @@ The design and implementation of a new system to allow easy access to population
 | 23 | The population of people, people living in cities, and people not living in cities in each continent | Yes | |
 | 24 | The population of people, people living in cities, and people not living in cities in each region. | Yes | |
 | 25 | The population of people, people living in cities, and people not living in cities in each country. | Yes | |
-| 26 | The population of the world | No | |
-| 27 | The population of a continent | No | |
-| 28 | The population of a region | No | |
-| 29 | The population of a country | No | |
-| 30 | The population of a district | No | |
-| 31 | The population of a city | No | |
+| 26 | The population of the world | Yes | |
+| 27 | The population of a continent | Yes | |
+| 28 | The population of a region | Yes | |
+| 29 | The population of a country | Yes | |
+| 30 | The population of a district | Yes | |
+| 31 | The population of a city | Yes | |
 | 32 | Provide the number of people who speak: Chinese, English, Hindi, Spanish, Arabic | No | |
 
