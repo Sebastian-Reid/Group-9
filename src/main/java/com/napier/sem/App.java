@@ -47,7 +47,11 @@ public class App
         a.getRegionPopulation(); //24
         a.getCountryPopulation(); //25
         //a.getWorldPopulation(); //26
-        a.getAllContinentPopulation(); // 27
+        a.getAContinentPopulation("Asia"); // 27
+        a.getARegionPopulation("Caribbean"); //28
+        a.getACountryPopulation("Japan"); //29
+        a.getADistrictPopulation("Tennessee"); //30
+        a.getACityPopulation("Tokyo"); //31
 
         a.disconnect();
     }
@@ -375,7 +379,6 @@ public class App
             System.out.println("17. Failed to get capital city details");
             return null;
         }
-
     }
 
     // 18. All the capital cities in a CONTINENT organised by largest population to smallest. (Continent = 'Asia')
@@ -484,8 +487,7 @@ public class App
             String strSelect =
                     " SELECT DISTINCT(country.Continent) AS dContinent, SUM(DISTINCT country.Population) AS coPopulation, SUM(city.Population) AS cPopulation" +
                             " FROM country JOIN city ON country.Code = city.CountryCode" +
-                            " WHERE country.Code = city.CountryCode" +
-                            " GROUP BY dContinent ";
+                            " WHERE country.Code = city.CountryCode";
                             //" ORDER BY coPopulation DESC";
 
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -601,28 +603,57 @@ public class App
         }
     }
     // 26. Population of the world
-
-    // 27. Population of each Continent
-    @RequestMapping("Population_of_all_continent")
-    public ArrayList<Country> getAllContinentPopulation() {
+    @RequestMapping("Population_of_world")
+    public ArrayList<Country> getWorldPopulation() {
         try {
             Statement stmt = con.createStatement();
 
             //population of people in the world
             String strSelect =
-                    " SELECT DISTINCT(country.Name) AS dCountry, SUM(DISTINCT country.Population) AS coPopulation, SUM(DISTINCT city.Population) AS cPopulation" +
-                            " FROM country JOIN city ON country.Code = city.CountryCode" +
-                            " WHERE country.Code = city.CountryCode" +
-                            " GROUP BY dCountry";
+                    " SELECT SUM(country.Population) AS wPopulation" +
+                            " FROM country";
 
             ResultSet rset = stmt.executeQuery(strSelect);
-
+            System.out.println("26. Population of the world.");
             ArrayList<Country> country = new ArrayList<Country>();
 
             while (rset.next()) {
                 Country cnt = new Country();
-                cnt.Name = rset.getString("dCountry");
-                cnt.Population = (int) rset.getLong("coPopulation");
+                cnt.Population = rset.getLong("wPopulation");
+
+                System.out.println("World Population" + " | " + cnt.Population);
+                country.add(cnt);
+            }
+            return country;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("26. Failed to get world population");
+
+            return null;
+        }
+    }
+
+    // 27. Population of a Continent
+    @RequestMapping("Population_of_all_continent")
+    public ArrayList<Country> getAContinentPopulation(String continent) {
+        try {
+            Statement stmt = con.createStatement();
+
+            //population of people in the world
+            String strSelect =
+                    " SELECT DISTINCT(country.Continent) AS dContinent, SUM(DISTINCT country.Population) AS coPopulation" +
+                            " FROM country " +
+                            " WHERE country.Continent = " + "'" + continent + "'";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            System.out.println("27. Population of a continent.");
+            System.out.println("Continent" + " | " + "Population");
+            ArrayList<Country> country = new ArrayList<Country>();
+
+            while (rset.next()) {
+                Country cnt = new Country();
+                cnt.Continent = rset.getString("dContinent");
+                cnt.Population = rset.getLong("coPopulation");
 
                 System.out.println(cnt.Continent + " | " + cnt.Population);
                 country.add(cnt);
@@ -632,6 +663,154 @@ public class App
             System.out.println(e.getMessage());
             System.out.println("27. Failed to get population of each continent");
 
+            return null;
+        }
+    }
+
+    // 28. Population of a Region
+    @RequestMapping("Population_of_a_region")
+    public ArrayList<Country> getARegionPopulation(String region) {
+        try {
+            Statement stmt = con.createStatement();
+
+            //population of people in the world
+            String strSelect =
+                    " SELECT DISTINCT(country.Region) AS cRegion, SUM(DISTINCT country.Population) AS coPopulation" +
+                            " FROM country " +
+                            " WHERE country.Region = " + "'" + region + "'";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            System.out.println("28. Population of a region.");
+            System.out.println("Region" + " | " + "Population");
+            ArrayList<Country> country = new ArrayList<Country>();
+            while (rset.next()) {
+                Country cnt = new Country();
+                cnt.Population = rset.getLong("coPopulation");
+                cnt.Region = rset.getString("cRegion");
+
+                System.out.println(cnt.Region + " | " + cnt.Population);
+                country.add(cnt);
+            }
+            return country;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("28. Failed to get population of each region");
+
+            return null;
+        }
+    }
+
+    // 29. Population of a Country
+    @RequestMapping("Population_of_a_region")
+    public ArrayList<Country> getACountryPopulation(String region) {
+        try {
+            Statement stmt = con.createStatement();
+
+            //population of people in the world
+            String strSelect =
+                    " SELECT DISTINCT(country.Name) AS cName, SUM(DISTINCT country.Population) AS coPopulation" +
+                            " FROM country " +
+                            " WHERE country.Name = " + "'" + region + "'";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            System.out.println("29. Population of a country.");
+            System.out.println("Country" + " | " + "Population");
+            ArrayList<Country> country = new ArrayList<Country>();
+            while (rset.next()) {
+                Country cnt = new Country();
+                cnt.Population = rset.getLong("coPopulation");
+                cnt.Name = rset.getString("cName");
+
+                System.out.println(cnt.Name + " | " + cnt.Population);
+                country.add(cnt);
+            }
+            return country;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("28. Failed to get population of each region");
+
+            return null;
+        }
+    }
+
+    // 30. Population of a district
+    public ArrayList<City> getADistrictPopulation(String district)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT DISTINCT(city.District), SUM(city.Population) AS cPopulation "
+                            + "FROM city "
+                            + "WHERE city.District = " + "'" + district +"'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new capital city if valid.
+            // Check one is returned
+            ArrayList<City> city = new ArrayList<City>();
+            System.out.println("30. Population of a district.");
+            System.out.println("City | Population ");
+            while (rset.next())
+            {
+                // Create new City (to store in database)
+                City cCty = new City();
+                cCty.District = rset.getString("District");
+                cCty.Population = rset.getInt("cPopulation");
+
+                System.out.println(cCty.District +  " | " + cCty.Population);
+                city.add(cCty);
+            }
+            System.out.println("\n");
+            return city;
+        }
+        catch (Exception e)
+        {
+            // Capital City not found.
+            System.out.println(e.getMessage());
+            System.out.println("30. Failed to get district population");
+            return null;
+        }
+    }
+
+    // 30. Population of a city
+    public ArrayList<City> getACityPopulation(String city)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT DISTINCT(city.Name), city.Population "
+                            + "FROM city "
+                            + "WHERE city.Name = " + "'" + city +"'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new capital city if valid.
+            // Check one is returned
+            ArrayList<City> nCity = new ArrayList<City>();
+            System.out.println("31. Population of a city.");
+            System.out.println("City | Population ");
+            while (rset.next())
+            {
+                // Create new City (to store in database)
+                City cCty = new City();
+                cCty.Name = rset.getString("Name");
+                cCty.Population = rset.getInt("Population");
+
+                System.out.println(cCty.Name +  " | " + cCty.Population);
+                nCity.add(cCty);
+            }
+            System.out.println("\n");
+            return nCity;
+        }
+        catch (Exception e)
+        {
+            // Capital City not found.
+            System.out.println(e.getMessage());
+            System.out.println("30. Failed to get district population");
             return null;
         }
     }

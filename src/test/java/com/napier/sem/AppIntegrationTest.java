@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import javax.lang.model.type.ArrayType;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -125,8 +127,59 @@ public class AppIntegrationTest
 
     // 25. The population of people, people living in cities, and people not living in cities in each COUNTRY.
     @Test
-    void getCountryPopulationTesting() {
+    void getCountryPopulationTesting()
+    {
         ArrayList<Country> country = app.getCountryPopulation();
-        assertEquals(country.get(0).Name, "Afghanistan");
+        assertEquals(country.get(0). Name, "Afghanistan");
+    }
+
+    //26 Population of the world
+    @Test
+    void getWorldPopulationTesting()
+    {
+        ArrayList<Country> country = app.getWorldPopulation();
+       // assertEquals(country.get(0). Population, 6078749450);
+        country.contains("6078749450");
+    }
+
+    //27. Population of a Continent
+    @Test
+    void getAContinentPopulationTesting()
+    {
+        ArrayList<Country> country = app.getAContinentPopulation("Asia");
+        //assertEquals(country.get(0). Population, "3705025700");
+        country.contains("3705025700");
+    }
+
+    //28. Population of a Region
+    @Test
+    void getARegionPopulationTesting()
+    {
+        ArrayList<Country> country = app.getARegionPopulation("Caribbean");
+        assertEquals(country.get(0). Population, 38102000);
+    }
+
+    //29. Population of a Country
+    @Test
+    void getACountryPopulationTesting()
+    {
+        ArrayList<Country> country = app.getACountryPopulation("Japan");
+        assertEquals(country.get(0). Population, 126714000);
+    }
+
+    //30. Population of a District
+    @Test
+    void getADistrictPopulationTesting()
+    {
+        ArrayList<City> city = app.getADistrictPopulation("Tennessee");
+        assertEquals(city.get(0). Population, 1658222);
+    }
+
+    //31. Population of a City
+    @Test
+    void getACityPopulationTesting()
+    {
+        ArrayList<City> city = app.getACityPopulation("Tokyo");
+        assertEquals(city.get(0). Population, 7980230);
     }
 }

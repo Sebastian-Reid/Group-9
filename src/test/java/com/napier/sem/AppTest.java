@@ -109,4 +109,27 @@ public class AppTest
         app.getCountryPopulation();
     }
 
+    //26. Population of the world
+    @Test
+    void getWorldPopulation() {app.getWorldPopulation();
+    }
+    //27. Population of a Continent
+    @Test
+    void getAContinentPopulation() { app.getAContinentPopulation(null);}
+
+    //28. Population of a region
+    @Test
+    void getARegionPopulation() {app.getARegionPopulation(null);}
+
+    //29. Population of a country
+    @Test
+    void getACountryPopulation() {app.getACountryPopulation(null);}
+
+    //30. Population of a district
+    @Test
+    void getADistrictPopulation() {app.getADistrictPopulation(null);}
+
+    //31. Population of a city
+    @Test
+    void getACityPopulation() {app.getACityPopulation(null);}
 }
