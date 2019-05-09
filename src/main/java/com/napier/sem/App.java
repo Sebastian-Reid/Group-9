@@ -63,11 +63,10 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            // ALl cities in the WORLD organised by largest population to smallest
             String strSelect =
                     "SELECT country.Name, country.Population"
                             + " FROM country"
-                            + " ORDER BY Population DESC LIMIT 10";
+                            + " ORDER BY Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -100,12 +99,11 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            // ALl the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
                     "SELECT SUM(country.Population) AS Population, country.Continent, country.Name"
                             + " FROM country"
                             + " GROUP BY Continent, Name"
-                            + " ORDER BY country.Continent, SUM(country.Population) DESC LIMIT 10";
+                            + " ORDER BY country.Continent, SUM(country.Population) DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -126,7 +124,7 @@ public class App
         } catch (Exception e) {
             // Capital City not found.
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
+            System.out.println("2. Failed to get city details");
             return null;
         }
     }
@@ -137,7 +135,6 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            // ALl the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
                     "SELECT SUM(country.Population) AS Population, country.Region, country.Name"
                             +" FROM country"
@@ -161,7 +158,7 @@ public class App
         } catch (Exception e) {
             // Capital City not found.
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
+            System.out.println("3. Failed to get city details");
             return null;
         }
     }
@@ -176,7 +173,7 @@ public class App
             String strSelect =
                     "SELECT city.Name, city.Population"
                             +" FROM city"
-                            +" ORDER BY city.Population DESC LIMIT 10";
+                            +" ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -276,7 +273,6 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            //All the cities in a country organised by largest population to smallest
             String strSelect =
                     "SELECT country.Name, city.Name AS cCity, city.Population"
                             +" FROM city"
@@ -346,13 +342,13 @@ public class App
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            // ALl the capital cities in the WORLD organised by largest population to smallest
+            // ALL the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
                     "SELECT city.Name, country.name AS 'CountryName', city.Population "
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
                             + "WHERE country.Capital = city.ID "
-                            + "ORDER BY city.population DESC LIMIT 10";
+                            + "ORDER BY city.population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -396,7 +392,7 @@ public class App
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
                             + "WHERE country.Capital = city.ID AND country.Continent = " + "'" + continent +"'"
-                            + " ORDER BY city.Population DESC LIMIT 10";
+                            + " ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -443,7 +439,7 @@ public class App
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
                             + "WHERE country.Capital = city.ID AND country.Region = " + "'" + region +"'"
-                            + " ORDER BY city.Population DESC LIMIT 10";
+                            + " ORDER BY city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
@@ -487,8 +483,8 @@ public class App
             String strSelect =
                     " SELECT DISTINCT(country.Continent) AS dContinent, SUM(DISTINCT country.Population) AS coPopulation, SUM(city.Population) AS cPopulation" +
                             " FROM country JOIN city ON country.Code = city.CountryCode" +
-                            " WHERE country.Code = city.CountryCode";
-                            //" ORDER BY coPopulation DESC";
+                            " WHERE country.Code = city.CountryCode" +
+                            " GROUP BY dContinent";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
