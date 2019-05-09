@@ -57,7 +57,6 @@ public class App
     }
 
     // 1. All the countries in the WORLD organised by largest population to smallest
-    @RequestMapping("world_population")
     public ArrayList<Country> getPopulationOrder() {
         try {
             // Create an SQL statement
@@ -69,7 +68,6 @@ public class App
                             + " ORDER BY Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new capital city if valid.
             // Check one is returned
             ArrayList<Country> PopOrder = new ArrayList<>();
             System.out.println("1. All the countries in the WORLD organised by largest population to smallest");
@@ -110,7 +108,6 @@ public class App
                             + " ORDER BY country.Continent, cPopulation DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new capital city if valid.
             // Check one is returned
             ArrayList<Country> Country = new ArrayList<>();
             System.out.println("2. All the countries in a CONTINENT organised by largest population to smallest.");
@@ -150,7 +147,6 @@ public class App
                             +" ORDER BY country.Region, cPopulation DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new capital city if valid.
             // Check one is returned
             ArrayList<Country> Country = new ArrayList<>();
             System.out.println("3. All the countries in a REGION organised by largest population to smallest.");
@@ -178,7 +174,6 @@ public class App
     }
 
     // 7. All the cities in the WORLD organised by largest population to smallest.
-    @RequestMapping("world_city_population")
     public ArrayList<City> getPopCity() {
         try {
             // Create an SQL statement
@@ -190,7 +185,6 @@ public class App
                             +" ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new capital city if valid.
             // Check one is returned
             ArrayList<City> CtyPop = new ArrayList<>();
             System.out.println("7. All the cities in the WORLD organised by largest population to smallest.");
@@ -372,7 +366,6 @@ public class App
     }
 
     // 17. All the capital cities in the WORLD organised by largest population to smallest.
-    @RequestMapping("all_city_population")
     public ArrayList<City> getAllCapital() {
         try {
             // Create an SQL statement
@@ -414,7 +407,6 @@ public class App
     }
 
     // 18. All the capital cities in a CONTINENT organised by largest population to smallest. (Continent = 'Asia')
-    @RequestMapping("continent_capital_city")
     public ArrayList<City> getAllCapitalContinent()
     {
         try
@@ -461,7 +453,6 @@ public class App
     }
 
    // 19. All the capital cities in a REGION organised by largest to smallest. (Region = 'Caribbean')
-    @RequestMapping("region_capital_city")
     public ArrayList<City> getRegionCapital()
     {
         try
@@ -508,7 +499,6 @@ public class App
 
     }
     // 23. The population of people, people living in cities, and people not living in cities in each CONTINENT.
-    @RequestMapping("continent_population")
     public ArrayList<Country> getContinentPopulation()
     {
         try
@@ -553,7 +543,6 @@ public class App
     }
 
     // 24. The population of people, people living in cities, and people not living in cities in each REGION.
-    @RequestMapping("region_population")
     public ArrayList<Country> getRegionPopulation()
     {
         try
@@ -595,7 +584,6 @@ public class App
     }
 
     // 25. The population of people, people living in cities, and people not living in cities in each COUNTRY.
-    @RequestMapping("country_population")
     public ArrayList<Country> getCountryPopulation() {
         try {
             Statement stmt = con.createStatement();
@@ -635,7 +623,6 @@ public class App
         }
     }
     // 26. Population of the World
-    @RequestMapping("Population_of_world")
     public ArrayList<Country> getWorldPopulation() {
         try {
             Statement stmt = con.createStatement();
@@ -666,12 +653,11 @@ public class App
     }
 
     // 27. Population of a Continent
-    @RequestMapping("Population_of_all_continent")
     public ArrayList<Country> getAContinentPopulation(String continent) {
         try {
             Statement stmt = con.createStatement();
 
-            //population of people in the world
+            //population of people in a continent
             String strSelect =
                     " SELECT DISTINCT(country.Continent) AS dContinent, SUM(DISTINCT country.Population) AS coPopulation" +
                             " FROM country " +
@@ -700,12 +686,11 @@ public class App
     }
 
     // 28. Population of a Region
-    @RequestMapping("Population_of_a_region")
     public ArrayList<Country> getARegionPopulation(String region) {
         try {
             Statement stmt = con.createStatement();
 
-            //population of people in the world
+            //population of people in a region
             String strSelect =
                     " SELECT DISTINCT(country.Region) AS cRegion, SUM(DISTINCT country.Population) AS coPopulation" +
                             " FROM country " +
@@ -733,7 +718,6 @@ public class App
     }
 
     // 29. Population of a Country
-    @RequestMapping("Population_of_a_region")
     public ArrayList<Country> getACountryPopulation(String region) {
         try {
             Statement stmt = con.createStatement();
@@ -779,7 +763,6 @@ public class App
                             + "WHERE city.District = " + "'" + district +"'";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new capital city if valid.
             // Check one is returned
             ArrayList<City> city = new ArrayList<City>();
             System.out.println("30. Population of a district.");
@@ -820,7 +803,6 @@ public class App
                             + "WHERE city.Name = " + "'" + city +"'";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new capital city if valid.
             // Check one is returned
             ArrayList<City> nCity = new ArrayList<City>();
             System.out.println("31. Population of a city.");
