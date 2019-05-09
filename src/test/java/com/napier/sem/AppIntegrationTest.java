@@ -24,10 +24,10 @@ public class AppIntegrationTest
         app.connect("localhost:33060");
     }
     /*
-         Testing for the first element in the array found in the SQL Statements
+         Testing for the first result in the array found in the SQL Statements
     */
 
-    // 1. Test for China
+    // 1. All the countries in the world organised by largest population to smallest (China)
     @Test
     void getPopulationOrderTesting()
     {
@@ -35,7 +35,7 @@ public class AppIntegrationTest
         assertEquals(countries .get(0). Population, 1277558000);
     }
 
-    //2. Test for Continent (Asia - China)
+    //2. All the countries in the continent organised by largest population to smallest (Asia-China)
     @Test
     void getContinentPopTesting()
     {
@@ -43,57 +43,56 @@ public class AppIntegrationTest
         assertEquals(countries .get(0). Population, 1277558000);
     }
 
-    // 3. Test for region
+    // 3. All the countries in the region organised by largest population to smallest (Antarctica)
     @Test
     void getRegionPopTesting()
     {
         ArrayList<Country> countries = app.getRegionPop();
         assertEquals(countries.get(0). Population, 0);
     }
-    // 7. Test for World (Mumbai)
+    // 7. All the cities in the world organised by largest population to smallest (Mumbai)
     @Test
     void getPopCityTesting()
     {
         ArrayList<City> cities = app.getPopCity();
         assertEquals(cities .get(0). Population, 10500000);
     }
-
-    // 8. Test for Continent (Mumbai)
+    // 8. All the cities in the continent organised by largest population to smallest (Asia - Mumbai)
     @Test
     void getCityPopConTesting()
     {
         ArrayList<City> cities = app.getCityPopCon();
         assertEquals(cities .get(0). Population, 10500000);
     }
-    // 9. Test for Australia and New Zealand
+    // 9. All the cities in the region organised by largest population to smallest (Region - Australia and New Zealand)
     @Test
     void getPopCityRegTesting()
     {
         ArrayList<City> cities = app.getPopCityReg();
         assertEquals(cities .get(0). Population, 3276207);
     }
-    // 10. Test for India Mumbai (Bombay)
+    // 10. All the cities in the country organised by largest population to smallest (Region-Afghanistan)
     @Test
     void getPopCityCountTesting()
     {
         ArrayList<City> cities = app.getPopCityCount();
-        assertEquals(cities .get(0). Population, 10500000);
+        assertEquals(cities .get(0). Population, 1780000);
     }
-    // 11. Test for Taiping
+    // 11. All the cities in the district organised by largest population to smallest
     @Test
     void getDiscPopTesting()
     {
         ArrayList<City> cities = app.getDiscPop();
         assertEquals(cities .get(0). Population, 165524);
     }
-    // 17. Test for Seoul
+    // 17. All the capital cities in the world organised by largest population to smallest
     @Test
     void getAllCapitalCityTesting()
     {
         ArrayList<City> capCity = app.getAllCapital();
         assertEquals(capCity .get(0). Population, 9981619);
     }
-    // 18. Test for Seoul
+    // 18. All the capital cities in a continent organised by largest population to smallest
     @Test
     void getContinentCapitalCityTesting()
     {
@@ -101,7 +100,7 @@ public class AppIntegrationTest
         assertEquals(capCity .get(0). Population, 9981619);
     }
 
-    // 19. Test for Caribbean
+    // 19. All the capital cities in a region organised by largest to smallest
     @Test
     void getRegionCapitalCityTesting()
     {
@@ -109,7 +108,7 @@ public class AppIntegrationTest
         assertEquals(capCity .get(0). Population, 2256000);
     }
 
-    // 23. Test for Asia
+    // 23. The population of people, people living in cities, and people not living in cities in each continent
     @Test
     void getContinentPopulationTesting()
     {
@@ -117,7 +116,7 @@ public class AppIntegrationTest
         assertEquals(countries .get(0). Continent, "Asia");
     }
 
-    // 24. Test for Australia and New Zealand
+    // 24. 	The population of people, people living in cities, and people not living in cities in each region.
     @Test
     void getCountryRegionPopulationTesting()
     {
@@ -133,7 +132,7 @@ public class AppIntegrationTest
         assertEquals(country.get(0). Name, "Afghanistan");
     }
 
-    //26 Population of the world
+    //26. The population of the world
     @Test
     void getWorldPopulationTesting()
     {
@@ -142,7 +141,7 @@ public class AppIntegrationTest
         country.contains("6078749450");
     }
 
-    //27. Population of a Continent
+    //27. The population of a continent
     @Test
     void getAContinentPopulationTesting()
     {
@@ -151,7 +150,7 @@ public class AppIntegrationTest
         country.contains("3705025700");
     }
 
-    //28. Population of a Region
+    //28. The population of a region
     @Test
     void getARegionPopulationTesting()
     {
