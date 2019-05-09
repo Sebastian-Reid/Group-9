@@ -79,14 +79,14 @@ public class AppTest
     @Test
     void getAllCapitalContinent()
     {
-        app.getAllCapitalContinent(null);
+        app.getAllCapitalContinent();
     }
 
     // 19. All the capital cities in a region organised by largest to smallest
     @Test
     void getRegionCapital()
     {
-        app.getRegionCapital(null);
+        app.getRegionCapital();
     }
 
     // 23. The population of people, people living in cities, and people not living in cities in each continent

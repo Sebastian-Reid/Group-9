@@ -41,8 +41,8 @@ public class App
         a.getPopCityCount(); //10
         a.getDiscPop(); //11
         a.getAllCapital(); //17
-        a.getAllCapitalContinent("Asia"); //18
-        a.getRegionCapital("Caribbean"); //19
+        a.getAllCapitalContinent(); //18
+        a.getRegionCapital(); //19
         a.getContinentPopulation(); // 23
         a.getRegionPopulation(); //24
         a.getCountryPopulation(); //25
@@ -415,7 +415,7 @@ public class App
 
     // 18. All the capital cities in a CONTINENT organised by largest population to smallest. (Continent = 'Asia')
     @RequestMapping("continent_capital_city")
-    public ArrayList<City> getAllCapitalContinent(String continent)
+    public ArrayList<City> getAllCapitalContinent()
     {
         try
         {
@@ -424,28 +424,28 @@ public class App
             // Create string for SQL statement
             // ALl the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
-                    "SELECT city.Name, country.Name AS 'CountryName', city.Population "
+                    "SELECT city.Name, country.Name AS 'CountryName', city.Population, country.Continent "
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
-                            + "WHERE country.Capital = city.ID AND country.Continent = " + "'" + continent +"'"
-                            + " ORDER BY city.Population DESC";
+                            + "WHERE country.Capital = city.ID "
+                            + " ORDER BY country.Continent, city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
             // Check one is returned
             ArrayList<City> capCity = new ArrayList<City>();
             System.out.println("18. All the capital cities in a CONTINENT organised by largest population to smallest.");
-            System.out.println("Name | Country | Population");
+            System.out.println("Continent | Name | Country | Population");
             while (rset.next())
             {
                 // Create new City (to store in database)
                 City cCty = new City();
                 cCty.Name = rset.getString("Name");
                 cCty.Population = rset.getInt("Population");
-
                 Country cCountry = new Country();
                 cCountry.Name = rset.getString("CountryName");
-                System.out.println(cCty.Name + " | " + cCountry.Name +" | " + cCty.Population );
+                cCountry.Continent = rset.getString("Continent");
+                System.out.println(cCountry.Continent + " | " + cCty.Name + " | " + cCountry.Name +" | " + cCty.Population );
                 capCity.add(cCty);
             }
             System.out.println("\n");
@@ -462,7 +462,7 @@ public class App
 
    // 19. All the capital cities in a REGION organised by largest to smallest. (Region = 'Caribbean')
     @RequestMapping("region_capital_city")
-    public ArrayList<City> getRegionCapital(String region)
+    public ArrayList<City> getRegionCapital()
     {
         try
         {
@@ -471,27 +471,27 @@ public class App
             // Create string for SQL statement
             // ALl the capital cities in the WORLD organised by largest population to smallest
             String strSelect =
-                    "SELECT city.Name, country.Name AS 'CountryName', city.Population "
+                    "SELECT city.Name, country.Name AS 'CountryName', city.Population, country.Region "
                             + "FROM country JOIN city "
                             + "ON country.Code = city.CountryCode  "
-                            + "WHERE country.Capital = city.ID AND country.Region = " + "'" + region +"'"
-                            + " ORDER BY city.Population DESC ";
+                            + "WHERE country.Capital = city.ID "
+                            + " ORDER BY country.Region, city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Return new capital city if valid.
             // Check one is returned
             ArrayList<City> capCity = new ArrayList<City>();
             System.out.println("19. All the capital cities in a REGION organised by largest to smallest.");
-            System.out.println("Name | Country | Population");
+            System.out.println("Region | Name | Country | Population");
             while (rset.next())
             {
                 City cCty = new City();
                 cCty.Name = rset.getString("Name");
                 cCty.Population = rset.getInt("Population");
-
                 Country cCountry = new Country();
                 cCountry.Name = rset.getString("CountryName");
-                System.out.println(cCty.Name + " | " + cCountry.Name +" | " + cCty.Population );
+                cCountry.Region = rset.getString("Region");
+                System.out.println(cCountry.Region + " | " + cCty.Name + " | " + cCountry.Name +" | " + cCty.Population );
 
                 capCity.add(cCty);
             }

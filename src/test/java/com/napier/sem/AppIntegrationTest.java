@@ -92,20 +92,20 @@ public class AppIntegrationTest
         ArrayList<City> capCity = app.getAllCapital();
         assertEquals(capCity .get(0). Population, 9981619);
     }
-    // 18. All the capital cities in a continent organised by largest population to smallest
+    // 18. All the capital cities in a continent organised by largest population to smallest (Seoul)
     @Test
     void getContinentCapitalCityTesting()
     {
-        ArrayList<City> capCity  = app.getAllCapitalContinent("Asia");
+        ArrayList<City> capCity  = app.getAllCapitalContinent();
         assertEquals(capCity .get(0). Population, 9981619);
     }
 
-    // 19. All the capital cities in a region organised by largest to smallest
+    // 19. All the capital cities in a region organised by largest to smallest (Canberra)
     @Test
     void getRegionCapitalCityTesting()
     {
-        ArrayList<City> capCity  = app.getRegionCapital("Caribbean");
-        assertEquals(capCity .get(0). Population, 2256000);
+        ArrayList<City> capCity  = app.getRegionCapital();
+        assertEquals(capCity .get(0). Population, 322723);
     }
 
     // 23. The population of people, people living in cities, and people not living in cities in each continent
